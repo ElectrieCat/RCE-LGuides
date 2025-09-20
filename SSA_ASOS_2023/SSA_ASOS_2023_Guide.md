@@ -53,26 +53,26 @@
 - Для машин с именем **Client** не нужно настраивать адреса и DNS, они будут получать их когда мы настроим DHCP Server
 
 Для серверных машин с графикой:
-![](SSA_ASOS_2023_Guide_20250920124043594.png)
-![](SSA_ASOS_2023_Guide_20250920124115976.png)
-![](SSA_ASOS_2023_Guide_20250920124137609.png)
-![](SSA_ASOS_2023_Guide_20250920124451141.png)
-![](SSA_ASOS_2023_Guide_20250920125007409.png)
-![](SSA_ASOS_2023_Guide_20250920125043583.png)
+![](images/SSA_ASOS_2023_Guide_20250920124043594.png)
+![](images/SSA_ASOS_2023_Guide_20250920124115976.png)
+![](images/SSA_ASOS_2023_Guide_20250920124137609.png)
+![](images/SSA_ASOS_2023_Guide_20250920124451141.png)
+![](images/SSA_ASOS_2023_Guide_20250920125007409.png)
+![](images/SSA_ASOS_2023_Guide_20250920125043583.png)
 
 Подождать открытия Server Manager
-![](SSA_ASOS_2023_Guide_20250920125443298.png)
-![](SSA_ASOS_2023_Guide_20250920125532430.png)
+![](images/SSA_ASOS_2023_Guide_20250920125443298.png)
+![](images/SSA_ASOS_2023_Guide_20250920125532430.png)
 
 Перезагружаемся, снова доходим до пункта Local Server
-![](SSA_ASOS_2023_Guide_20250920125830718.png)
-![](SSA_ASOS_2023_Guide_20250920125915448.png)
-![](SSA_ASOS_2023_Guide_20250920130651496.png)
-![](SSA_ASOS_2023_Guide_20250920131025264.png)
+![](images/SSA_ASOS_2023_Guide_20250920125830718.png)
+![](images/SSA_ASOS_2023_Guide_20250920125915448.png)
+![](images/SSA_ASOS_2023_Guide_20250920130651496.png)
+![](images/SSA_ASOS_2023_Guide_20250920131025264.png)
 
 Включим ICMP in
-![](SSA_ASOS_2023_Guide_20250920131729768.png)
-![](SSA_ASOS_2023_Guide_20250920131932221.png)
+![](images/SSA_ASOS_2023_Guide_20250920131729768.png)
+![](images/SSA_ASOS_2023_Guide_20250920131932221.png)
 
 Для серверных машин без графики
 
@@ -80,27 +80,27 @@
 
 
 То закрыть окошко на крестик, и нажать Ctrl+Alt+Del или Ctrl+Alt+End
-![](SSA_ASOS_2023_Guide_20250920132643325.png)
-![](SSA_ASOS_2023_Guide_20250920132756724.png)
-![](SSA_ASOS_2023_Guide_20250920132823687.png)
+![](images/SSA_ASOS_2023_Guide_20250920132643325.png)
+![](images/SSA_ASOS_2023_Guide_20250920132756724.png)
+![](images/SSA_ASOS_2023_Guide_20250920132823687.png)
 
 Вводим
 ```
 sconfig
 ```
-![](SSA_ASOS_2023_Guide_20250920133154846.png)
-![](SSA_ASOS_2023_Guide_20250920133320694.png)
-![](SSA_ASOS_2023_Guide_20250920133425604.png)
+![](images/SSA_ASOS_2023_Guide_20250920133154846.png)
+![](images/SSA_ASOS_2023_Guide_20250920133320694.png)
+![](images/SSA_ASOS_2023_Guide_20250920133425604.png)
 
 Вводим
 ```
 sconfig
 ```
-![](SSA_ASOS_2023_Guide_20250920144019420.png)
-![](SSA_ASOS_2023_Guide_20250920144645381.png)
-![](SSA_ASOS_2023_Guide_20250920144951677.png)
-![](SSA_ASOS_2023_Guide_20250920145043095.png)
-![](SSA_ASOS_2023_Guide_20250920145200647.png)
+![](images/SSA_ASOS_2023_Guide_20250920144019420.png)
+![](images/SSA_ASOS_2023_Guide_20250920144645381.png)
+![](images/SSA_ASOS_2023_Guide_20250920144951677.png)
+![](images/SSA_ASOS_2023_Guide_20250920145043095.png)
+![](images/SSA_ASOS_2023_Guide_20250920145200647.png)
 
 Разрешим ICMP in
 
@@ -108,4 +108,4 @@ sconfig
 ```
 netsh firewall set icmpsetting 8
 ```
-![](SSA_ASOS_2023_Guide_20250920150653065.png)
+![](images/SSA_ASOS_2023_Guide_20250920150653065.png)
