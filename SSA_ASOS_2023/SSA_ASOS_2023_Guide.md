@@ -1,5 +1,7 @@
 # SSA ASOS 2023
-## Общая информация
+## Информация и решение проблем
+### Топология  
+![](images/SSA_ASOS_2023_Guide_20250920165649989.png)
 ### Пользователи
 - Для серверных машин
 
@@ -109,3 +111,123 @@ sconfig
 netsh firewall set icmpsetting 8
 ```
 ![](images/SSA_ASOS_2023_Guide_20250920150653065.png)
+
+Настройка имени компьютера для машин **CLIENT**
+![](images/SSA_ASOS_2023_Guide_20250920162315507.png)
+![](images/SSA_ASOS_2023_Guide_20250920162330870.png)
+![](images/SSA_ASOS_2023_Guide_20250920162341206.png)
+
+![](images/SSA_ASOS_2023_Guide_20250920162845366.png)
+![](images/SSA_ASOS_2023_Guide_20250920162947699.png)
+![](images/SSA_ASOS_2023_Guide_20250920163043970.png)
+![](images/SSA_ASOS_2023_Guide_20250920163102710.png)
+![](images/SSA_ASOS_2023_Guide_20250920163121161.png)
+
+Здесь можно вписать любой текст, для быстрого выбора вопросов без открытия списка используйте колёсико мыши, повторяем трижды
+
+![](images/SSA_ASOS_2023_Guide_20250920163258507.png)
+![](images/SSA_ASOS_2023_Guide_20250920163337295.png)
+Ждём перезагрузку
+
+Настроим имя компьютера
+![](images/SSA_ASOS_2023_Guide_20250920164718057.png)
+![](images/SSA_ASOS_2023_Guide_20250920164937448.png)
+![](images/SSA_ASOS_2023_Guide_20250920164955921.png)
+
+Далее нажимаем "Закрыть" и нажимаем "Перезагрузить сейчас"
+
+Включим ICMP in
+![](images/SSA_ASOS_2023_Guide_20250920165255298.png)
+
+Настроить по аналогии с тем, как настраивали для серверных машин с графикой
+
+Проверим работу ICMP, пингуя те машины на которых разрешили его
+![](images/SSA_ASOS_2023_Guide_20250920202530159.png)
+
+## Поднятие домена
+Пример для **DC-M**, для **DC-IZ** по аналогии
+![](images/SSA_ASOS_2023_Guide_20250920202718199.png)
+![](images/SSA_ASOS_2023_Guide_20250920202803403.png)
+![](images/SSA_ASOS_2023_Guide_20250920202826822.png)
+![](images/SSA_ASOS_2023_Guide_20250920202909406.png)
+![](images/SSA_ASOS_2023_Guide_20250920202926239.png)
+![](images/SSA_ASOS_2023_Guide_20250920202938517.png)
+![](images/SSA_ASOS_2023_Guide_20250920203002282.png)
+![](images/SSA_ASOS_2023_Guide_20250920203115411.png)
+![](images/SSA_ASOS_2023_Guide_20250920203244932.png)
+![](images/SSA_ASOS_2023_Guide_20250920203336492.png)
+![](images/SSA_ASOS_2023_Guide_20250920203513309.png)
+![](images/SSA_ASOS_2023_Guide_20250920203827198.png)
+![](images/SSA_ASOS_2023_Guide_20250920203846582.png)
+![](images/SSA_ASOS_2023_Guide_20250920203906851.png)
+![](images/SSA_ASOS_2023_Guide_20250920203916157.png)
+![](images/SSA_ASOS_2023_Guide_20250920203929458.png)
+![](images/SSA_ASOS_2023_Guide_20250920204405826.png)
+Сервер автоматически перезагрузится
+
+Введём машины в домен в соответствии с таблицей 1
+Для серверных машин с графикой
+![](images/SSA_ASOS_2023_Guide_20250920224324533.png)
+Вводим логин и пароль учетной записи администратора домена
+![](images/SSA_ASOS_2023_Guide_20250920224425842.png)
+Успешный ввод машины в домен выглядит так
+![](images/SSA_ASOS_2023_Guide_20250920224508382.png)
+![](images/SSA_ASOS_2023_Guide_20250920225153666.png)
+![](images/SSA_ASOS_2023_Guide_20250920225216267.png)
+![](images/SSA_ASOS_2023_Guide_20250920225224239.png)
+
+Для серверных машин без графики
+Вводим
+```
+sconfig
+```
+![](images/SSA_ASOS_2023_Guide_20250920224656816.png)
+![](images/SSA_ASOS_2023_Guide_20250920224900660.png)
+![](images/SSA_ASOS_2023_Guide_20250920225026276.png)
+![](images/SSA_ASOS_2023_Guide_20250920225121001.png)
+![](images/SSA_ASOS_2023_Guide_20250920225132815.png)
+Клиентские машины в домен введём после настройки DHCP 
+
+## Установка DHCP
+На **DC-M**
+Мы уже знаем как дойти до вкладки "Select server roles", поэтому продолжим инструкцию оттуда
+![](images/SSA_ASOS_2023_Guide_20250920232630995.png)
+![](images/SSA_ASOS_2023_Guide_20250920232652780.png)
+![](images/SSA_ASOS_2023_Guide_20250920232711168.png)
+![](images/SSA_ASOS_2023_Guide_20250920232755463.png)
+![](images/SSA_ASOS_2023_Guide_20250920232942207.png)
+![](images/SSA_ASOS_2023_Guide_20250920232957350.png)
+![](images/SSA_ASOS_2023_Guide_20250920233018912.png)
+![](images/SSA_ASOS_2023_Guide_20250920233040118.png)
+![](images/SSA_ASOS_2023_Guide_20250920233047879.png)
+![](images/SSA_ASOS_2023_Guide_20250920233220956.png)
+![](images/SSA_ASOS_2023_Guide_20250920233847522.png)
+![](images/SSA_ASOS_2023_Guide_20250920233906657.png)
+![](images/SSA_ASOS_2023_Guide_20250920233931442.png)
+![](images/SSA_ASOS_2023_Guide_20250920234100049.png)
+![](images/SSA_ASOS_2023_Guide_20250920234112909.png)
+![](images/SSA_ASOS_2023_Guide_20250920234128352.png)
+![](images/SSA_ASOS_2023_Guide_20250920234139758.png)
+![](images/SSA_ASOS_2023_Guide_20250920234224521.png)
+![](images/SSA_ASOS_2023_Guide_20250920234319325.png)
+![](images/SSA_ASOS_2023_Guide_20250920234335580.png)
+![](images/SSA_ASOS_2023_Guide_20250920234345122.png)
+### Ввод клиентских машин в домен
+На **CLIENT-M**
+
+Чтобы удостовериться, что клиент получил адрес от DHCP сервера перед тем как ввести его в домен, вводим в cmd
+```
+ipconfig
+```
+![](images/SSA_ASOS_2023_Guide_20250920234900361.png)
+Если клиент не получил адрес, вводим
+```
+ipconfig /renew
+```
+Вводим клиента в домен
+Мы уже знаем как перейти в "Свойства системы", продолжим оттуда
+![](images/SSA_ASOS_2023_Guide_20250920235348122.png)
+![](images/SSA_ASOS_2023_Guide_20250920235422408.png)
+![](images/SSA_ASOS_2023_Guide_20250920235441500.png)
+![](images/SSA_ASOS_2023_Guide_20250920235450342.png)
+![](images/SSA_ASOS_2023_Guide_20250921000717375.png)
