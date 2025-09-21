@@ -189,7 +189,8 @@ sconfig
 Клиентские машины в домен введём после настройки DHCP 
 
 ## Установка DHCP
-На **DC-M**
+На **DC-M**, на **DC-IZ** настроить DHCP по аналогии, но без failover
+
 Мы уже знаем как дойти до вкладки "Select server roles", поэтому продолжим инструкцию оттуда
 ![](images/SSA_ASOS_2023_Guide_20250920232630995.png)
 ![](images/SSA_ASOS_2023_Guide_20250920232652780.png)
@@ -225,9 +226,90 @@ ipconfig
 ipconfig /renew
 ```
 Вводим клиента в домен
+
 Мы уже знаем как перейти в "Свойства системы", продолжим оттуда
 ![](images/SSA_ASOS_2023_Guide_20250920235348122.png)
 ![](images/SSA_ASOS_2023_Guide_20250920235422408.png)
 ![](images/SSA_ASOS_2023_Guide_20250920235441500.png)
 ![](images/SSA_ASOS_2023_Guide_20250920235450342.png)
 ![](images/SSA_ASOS_2023_Guide_20250921000717375.png)
+
+### Настройка DHCP failover
+Установим DHCP на FILES-M
+
+Заходим на DC-M
+![](images/SSA_ASOS_2023_Guide_20250921094619303.png)
+![](images/SSA_ASOS_2023_Guide_20250921094744777.png)
+Теперь переходим на страницу "Select Destination Server"
+![](images/SSA_ASOS_2023_Guide_20250921094941617.png)
+![](images/SSA_ASOS_2023_Guide_20250921095014177.png)
+![](images/SSA_ASOS_2023_Guide_20250921095023098.png)
+![](images/SSA_ASOS_2023_Guide_20250921095032969.png)
+![](images/SSA_ASOS_2023_Guide_20250921095057245.png)
+![](images/SSA_ASOS_2023_Guide_20250921095137708.png)
+![](images/SSA_ASOS_2023_Guide_20250921095149955.png)
+![](images/SSA_ASOS_2023_Guide_20250921095200071.png)
+![](images/SSA_ASOS_2023_Guide_20250921095209258.png)
+![](images/SSA_ASOS_2023_Guide_20250921095221703.png)
+![](images/SSA_ASOS_2023_Guide_20250921095306577.png)
+![](images/SSA_ASOS_2023_Guide_20250921095356737.png)
+![](images/SSA_ASOS_2023_Guide_20250921095409919.png)
+![](images/SSA_ASOS_2023_Guide_20250921095520462.png)
+![](images/SSA_ASOS_2023_Guide_20250921095713859.png)
+![](images/SSA_ASOS_2023_Guide_20250921095806519.png)
+![](images/SSA_ASOS_2023_Guide_20250921100146690.png)
+![](images/SSA_ASOS_2023_Guide_20250921100251302.png)
+![](images/SSA_ASOS_2023_Guide_20250921100259430.png)
+
+## DNS и AD
+На **DC-M** 
+![](images/SSA_ASOS_2023_Guide_20250921113942126.png)
+![](images/SSA_ASOS_2023_Guide_20250921113949963.png)
+![](images/SSA_ASOS_2023_Guide_20250921114010183.png)
+![](images/SSA_ASOS_2023_Guide_20250921114036316.png)
+![](images/SSA_ASOS_2023_Guide_20250921114046381.png)
+![](images/SSA_ASOS_2023_Guide_20250921114054182.png)
+![](images/SSA_ASOS_2023_Guide_20250921114120640.png)
+![](images/SSA_ASOS_2023_Guide_20250921114148117.png)
+![](images/SSA_ASOS_2023_Guide_20250921114249245.png)
+![](images/SSA_ASOS_2023_Guide_20250921114306250.png)
+![](images/SSA_ASOS_2023_Guide_20250921114457007.png)
+![](images/SSA_ASOS_2023_Guide_20250921114853072.png)
+![](images/SSA_ASOS_2023_Guide_20250921115230340.png)
+![](images/SSA_ASOS_2023_Guide_20250921115239156.png)
+![](images/SSA_ASOS_2023_Guide_20250921115420306.png)
+![](images/SSA_ASOS_2023_Guide_20250921115432443.png)
+![](images/SSA_ASOS_2023_Guide_20250921115448359.png)
+![](images/SSA_ASOS_2023_Guide_20250921115517679.png)
+![](images/SSA_ASOS_2023_Guide_20250921115854454.png)
+Настроим и создадим PTR зону, а так же её репликацию на FILES-M 
+![](images/SSA_ASOS_2023_Guide_20250921120104356.png)
+![](images/SSA_ASOS_2023_Guide_20250921121924697.png)
+![](images/SSA_ASOS_2023_Guide_20250921121931785.png)
+![](images/SSA_ASOS_2023_Guide_20250921121959435.png)
+![](images/SSA_ASOS_2023_Guide_20250921122014984.png)
+![](images/SSA_ASOS_2023_Guide_20250921122025068.png)
+![](images/SSA_ASOS_2023_Guide_20250921122131520.png)
+![](images/SSA_ASOS_2023_Guide_20250921122215973.png)
+![](images/SSA_ASOS_2023_Guide_20250921122233311.png)
+![](images/SSA_ASOS_2023_Guide_20250921122628865.png)
+Операцию создания PTR записи повторить для всех записей типа "A", кроме записей для машин **EDGE**, в которых IP адрес находится в другой подсети
+![](images/SSA_ASOS_2023_Guide_20250921123034162.png)
+Проверим, что зоны DNS реплицировались на **FILES-M**
+![](images/SSA_ASOS_2023_Guide_20250921123447935.png)
+![](images/SSA_ASOS_2023_Guide_20250921123558451.png)
+
+## RRAS
+На **DC-M**
+![](images/SSA_ASOS_2023_Guide_20250921135331560.png)
+![](images/SSA_ASOS_2023_Guide_20250921135455901.png)
+![](images/SSA_ASOS_2023_Guide_20250921135614119.png)
+![](images/SSA_ASOS_2023_Guide_20250921135644748.png)
+![](images/SSA_ASOS_2023_Guide_20250921135722387.png)
+![](images/SSA_ASOS_2023_Guide_20250921135732945.png)
+![](images/SSA_ASOS_2023_Guide_20250921135834840.png)
+![](images/SSA_ASOS_2023_Guide_20250921135844746.png)
+![](images/SSA_ASOS_2023_Guide_20250921135856138.png)
+![](images/SSA_ASOS_2023_Guide_20250921135914902.png)
+![](images/SSA_ASOS_2023_Guide_20250921135935011.png)
+![](images/SSA_ASOS_2023_Guide_20250921140305996.png)
