@@ -108,9 +108,15 @@ sconfig
 
 Вводим
 ```
-netsh firewall set icmpsetting 8
+sconfig
 ```
-![](images/SSA_ASOS_2023_Guide_20250920150653065.png)
+Далее вводим попорядку
+```
+4
+3
+```
+![](images/SSA_ASOS_2023_Guide_20250921231153582.png)
+![](images/SSA_ASOS_2023_Guide_20250921231206882.png)
 
 Настройка имени компьютера для машин **CLIENT**
 ![](images/SSA_ASOS_2023_Guide_20250920162315507.png)
@@ -300,7 +306,7 @@ ipconfig /renew
 ![](images/SSA_ASOS_2023_Guide_20250921123558451.png)
 
 ## RRAS
-На **DC-M**
+На **DC-M**, по аналогии настроить на **DC-IZ**
 ![](images/SSA_ASOS_2023_Guide_20250921135331560.png)
 ![](images/SSA_ASOS_2023_Guide_20250921135455901.png)
 ![](images/SSA_ASOS_2023_Guide_20250921135614119.png)
@@ -313,3 +319,33 @@ ipconfig /renew
 ![](images/SSA_ASOS_2023_Guide_20250921135914902.png)
 ![](images/SSA_ASOS_2023_Guide_20250921135935011.png)
 ![](images/SSA_ASOS_2023_Guide_20250921140305996.png)
+Далее пример настройки маршрутизации в сегменте Ижевска, по аналогии сделать в Москве
+На **DC-IZ**
+![](images/SSA_ASOS_2023_Guide_20250921221251567.png)
+![](images/SSA_ASOS_2023_Guide_20250921221331687.png)
+![](images/SSA_ASOS_2023_Guide_20250921221413479.png)
+![](images/SSA_ASOS_2023_Guide_20250921221426435.png)
+![](images/SSA_ASOS_2023_Guide_20250921221456656.png)
+![](images/SSA_ASOS_2023_Guide_20250921221511070.png)
+![](images/SSA_ASOS_2023_Guide_20250921221519214.png)
+![](images/SSA_ASOS_2023_Guide_20250921221535513.png)
+![](images/SSA_ASOS_2023_Guide_20250921221603344.png)
+![](images/SSA_ASOS_2023_Guide_20250921221625596.png)
+![](images/SSA_ASOS_2023_Guide_20250921222141968.png)
+![](images/SSA_ASOS_2023_Guide_20250921222433982.png)
+![](images/SSA_ASOS_2023_Guide_20250921222601169.png)
+![](images/SSA_ASOS_2023_Guide_20250921223622111.png)
+![](images/SSA_ASOS_2023_Guide_20250921223656643.png)
+![](images/SSA_ASOS_2023_Guide_20250921223708679.png)
+![](images/SSA_ASOS_2023_Guide_20250921225027983.png)
+![](images/SSA_ASOS_2023_Guide_20250921225536628.png)
+![](images/SSA_ASOS_2023_Guide_20250921225730942.png)
+![](images/SSA_ASOS_2023_Guide_20250921225749600.png)
+![](images/SSA_ASOS_2023_Guide_20250921225811066.png)
+![](images/SSA_ASOS_2023_Guide_20250921225826484.png)
+![](images/SSA_ASOS_2023_Guide_20250921225854425.png)
+![](images/SSA_ASOS_2023_Guide_20250921225919814.png)
+![](images/SSA_ASOS_2023_Guide_20250921230200276.png)
+![](images/SSA_ASOS_2023_Guide_20250921232014077.png)
+Теперь чтобы наши настройки точно применились, перезагрузим RRAS
+![](images/SSA_ASOS_2023_Guide_20250921232256699.png)
