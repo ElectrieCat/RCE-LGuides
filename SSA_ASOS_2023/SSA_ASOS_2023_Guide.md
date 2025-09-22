@@ -350,3 +350,53 @@ ipconfig /renew
 ![](images/SSA_ASOS_2023_Guide_20250921232014077.png)
 Теперь чтобы наши настройки точно применились, перезагрузим RRAS
 ![](images/SSA_ASOS_2023_Guide_20250921232256699.png)
+Проверим, что между сетями есть связь, с **DC-M** пинганём **DC-IZ**
+![](images/SSA_ASOS_2023_Guide_20250922210350979.png)
+
+## Настройка трастов
+Выполним задание
+```
+Настройка DC-M
+
+Настройте одностороннее нетранзитивное доверие с доменом Izhevsk.ru – пользователи домена
+Moscow.ru должны иметь доступ к ресурсам домена Izhevsk.ru, но не наоборот.
+```
+На **DC-M**
+Добавим DNS сервер домена Izhevsk.ru на **DC-M**
+![](images/SSA_ASOS_2023_Guide_20250922214046753.png)
+![](images/SSA_ASOS_2023_Guide_20250922214056637.png)
+
+Приступим к настройке трастов
+![](images/SSA_ASOS_2023_Guide_20250922210830908.png)
+![](images/SSA_ASOS_2023_Guide_20250922211039885.png)
+![](images/SSA_ASOS_2023_Guide_20250922211204302.png)
+![](images/SSA_ASOS_2023_Guide_20250922211951767.png) 
+![](images/SSA_ASOS_2023_Guide_20250922214311756.png)
+![](images/SSA_ASOS_2023_Guide_20250922215759333.png)
+![](images/SSA_ASOS_2023_Guide_20250922215938680.png)
+![](images/SSA_ASOS_2023_Guide_20250922220101342.png)
+![](images/SSA_ASOS_2023_Guide_20250922220201122.png)
+![](images/SSA_ASOS_2023_Guide_20250922220246775.png)
+![](images/SSA_ASOS_2023_Guide_20250922220334367.png)
+![](images/SSA_ASOS_2023_Guide_20250922220424666.png)
+![](images/SSA_ASOS_2023_Guide_20250922220635947.png)
+![](images/SSA_ASOS_2023_Guide_20250922220731945.png)
+
+Теперь подтвердим траст
+![](images/SSA_ASOS_2023_Guide_20250922223332251.png)
+![](images/SSA_ASOS_2023_Guide_20250922223237165.png)
+![](images/SSA_ASOS_2023_Guide_20250922223245248.png)
+
+Теперь проверим что на **DC-IZ** траст тоже подтвержден
+![](images/SSA_ASOS_2023_Guide_20250922223828138.png)
+![](images/SSA_ASOS_2023_Guide_20250922224045161.png)
+
+Чтобы проверить, что односторонний траст был настроен, на **CLIENT-IZ** зайдем под пользователем Administrator в домене Moscow.ru
+![](images/SSA_ASOS_2023_Guide_20250922224620896.png)
+Если нас впустило, то всё сработало
+![](images/SSA_ASOS_2023_Guide_20250922224926227.png)
+
+
+Проверим противоположное на **CLIENT-M**, авторизация не должна сработать
+![](images/SSA_ASOS_2023_Guide_20250922224457148.png)
+![](images/SSA_ASOS_2023_Guide_20250922224528222.png)
