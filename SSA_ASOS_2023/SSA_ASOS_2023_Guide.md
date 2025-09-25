@@ -403,8 +403,56 @@ Moscow.ru должны иметь доступ к ресурсам домена 
 ![](images/SSA_ASOS_2023_Guide_20250922224528222.png)
 
 ## GPO
+### Элементы доменной инфраструктуры
+Выполним задание
+```
+Cоздайте подразделения: Experts, Competitors, Managers, Visitors, IT и Project;
+```
+Дополнительно создадим ```CompanyUsers, ClientPCs```
+
+![](images/SSA_ASOS_2023_Guide_20250924211310959.png)
+![](images/SSA_ASOS_2023_Guide_20250924212040032.png)
+![](images/SSA_ASOS_2023_Guide_20250924212119122.png)
+Создайте оставшиеся OU по аналогии
+
+Выполним задание
+```
+В соответствующих подразделениях создайте доменные группы:
+Experts, Competitors, Managers, Visitors,IT , Project_Budget-R, Project_Budget-W, Project_Intranet-R, Project_Intranet-W, Project_Logistics-R, Project_Logistics-W;
+```
+
+![](images/SSA_ASOS_2023_Guide_20250924213935911.png)
+![](images/SSA_ASOS_2023_Guide_20250924214228940.png)
+
+Создайте остальные доменные группы по аналогии
+
+```
+Создайте 3-4 пользователя(вся имеющаяся информация о пользователях должна быть внесена в Active Directory); поместите пользователей в
+соответствующие подразделения и группы; все созданные учетные записи должны быть включены и доступны;
+```
+#### Информация о пользователях
+| Полное имя       | Логин     | Должность           | Отдел      | Группы AD       | Email               | Телефон       | Пароль   |
+|------------------|-----------|---------------------|------------|-----------------|---------------------|---------------|----------|
+| Ivan Petrov      | petrov.i  | System Administrator | IT  | Experts, IT     | petrov.i@company.ru | +74951112288 | P@ssw0rd |
+| Olga Sidorova    | sidorova.o| Guest               | External Relations | Visitors      | sidorova.o@company.ru | +74951112299 | P@ssw0rd |
+| Dmitry Kovalev   | kovalev.d | Logistics Manager   | Logistics  | Logistics, Managers | kovalev.d@company.ru | +74951113300 | P@ssw0rd |
+
+
+![](images/SSA_ASOS_2023_Guide_20250924224506035.png)
+![](images/SSA_ASOS_2023_Guide_20250924224819600.png)
+![](images/SSA_ASOS_2023_Guide_20250924224921810.png)
+![](images/SSA_ASOS_2023_Guide_20250924224932019.png)
+![](images/SSA_ASOS_2023_Guide_20250924225038411.png)
+![](images/SSA_ASOS_2023_Guide_20250924225503896.png)
+![](images/SSA_ASOS_2023_Guide_20250924225630384.png)
+![](images/SSA_ASOS_2023_Guide_20250924225912037.png)
+Остальных пользователей создать по аналогии
+
+### Остальные задания GPO
+
 На **DC-M**
 Выполним задание
+
 ```
 запретите анимацию при первом входе пользователей в систему на всех клиентских компьютерах
 домена
@@ -417,51 +465,53 @@ Moscow.ru должны иметь доступ к ресурсам домена 
 ![](images/SSA_ASOS_2023_Guide_20250922235354592.png)
 ![](images/SSA_ASOS_2023_Guide_20250922235551584.png)
 ![](images/SSA_ASOS_2023_Guide_20250922235611446.png)
+![](images/SSA_ASOS_2023_Guide_20250925182213874.png)
+![](images/SSA_ASOS_2023_Guide_20250925182349965.png)
+![](images/SSA_ASOS_2023_Guide_20250925182420062.png)
+![](images/SSA_ASOS_2023_Guide_20250925182607845.png)
+![](images/SSA_ASOS_2023_Guide_20250925182735064.png)
 
 Проверим отсутствие анимации на **CLIENT-M**, авторизировавшись на нём от имени администратора домена, но перед этим компьютер нужно перезагрузить для применения групповых политик
 ![](images/SSA_ASOS_2023_Guide_20250923002144465.png)
 ![](images/SSA_ASOS_2023_Guide_20250923000036949.png)
+
 Если всё сработало, то во время входа будет надпись "Подготовка Windows" вместо стандартной анимации, начинающийся с текста "Привет!"
-### Элементы доменной инфраструктуры
+
+Выполним задание 
+```
+Члены группы IT должны быть членами группы локальных администраторов на всех клиентских компьютерах домена;
+```
+![](images/SSA_ASOS_2023_Guide_20250925185340599.png)
+![](images/SSA_ASOS_2023_Guide_20250925185409133.png)
+![](images/SSA_ASOS_2023_Guide_20250925185432565.png)
+![](images/SSA_ASOS_2023_Guide_20250925185719638.png)
+![](images/SSA_ASOS_2023_Guide_20250925185952629.png)
+![](images/SSA_ASOS_2023_Guide_20250925190119565.png)
+![](images/SSA_ASOS_2023_Guide_20250925190239591.png)
+
+Проверим работу этой политики
+Заходим на **CLIENT-M** под юзером `petrov.i`
+Обновим политики
+![](images/SSA_ASOS_2023_Guide_20250925200114389.png)
+![](images/SSA_ASOS_2023_Guide_20250925200156679.png)
+![](images/SSA_ASOS_2023_Guide_20250925200325798.png)
+
 Выполним задание
 ```
-Cоздайте подразделения: Experts, Competitors, Managers, Visitors, IT и Project;
+Запретите изменение экранной заставки и Корзину на рабочем столе для всех пользователей домена, кроме членов группы локальных администраторов клиентских компьютеров
 ```
+На **DC-M** создадим политику для всего домена с именем wallpapers_and_bin и настроим её
+![](images/SSA_ASOS_2023_Guide_20250925201733747.png)
+![](images/SSA_ASOS_2023_Guide_20250925201818858.png)
+Теперь уберём корзину с рабочего стола
+![](images/SSA_ASOS_2023_Guide_20250925202045026.png)
+![](images/SSA_ASOS_2023_Guide_20250925202108888.png)
 
-![](images/SSA_ASOS_2023_Guide_20250924211310959.png)
-![](images/SSA_ASOS_2023_Guide_20250924212040032.png)
-![](images/SSA_ASOS_2023_Guide_20250924212119122.png)
-Создайте оставшиеся OU по аналогии
+Перейдём на **CLIENT-M**
 
-Выполним задание
-```
-В соответствующих подразделениях создайте доменные группы:
-Experts, Competitors, Managers, Visitors,IT , Project_Budget-R, Project_Budget-W, Project_Intranet-R, Project_Intranet-W, Project_Logistics-R, Project_Logistics-W;
-```
-Дополнительно создадим группу ```CompanyUsers```, в последствии будем создавать пользователей в ней
+Перезагрузим его
 
-![](images/SSA_ASOS_2023_Guide_20250924213935911.png)
-![](images/SSA_ASOS_2023_Guide_20250924214228940.png)
+Зайдём под пользователем `sidorova.o`
 
-Создайте остальные доменные группы по аналогии
-
-```
-Создайте 3-4 пользователя(вся имеющаяся информация о пользователях должна быть внесена в Active Directory); поместите пользователей в
-соответствующие подразделения и группы; все созданные учетные записи должны быть включены и доступны;
-```
-Информация о пользователях
-| Полное имя       | Логин     | Должность           | Отдел      | Группы AD       | Email               | Телефон       | Пароль   |
-|------------------|-----------|---------------------|------------|-----------------|---------------------|---------------|----------|
-| Ivan Petrov      | petrov.i  | System Administrator | IT  | Experts, IT     | petrov.i@company.ru | +74951112288 | P@ssw0rd |
-| Olga Sidorova    | sidorova.o| Guest               | External Relations | Visitors      | sidorova.o@company.ru | +74951112299 | P@ssw0rd |
-| Dmitry Kovalev   | kovalev.d | Logistics Manager   | Logistics  | Logistics, Managers | kovalev.d@company.ru | +74951113300 | P@ssw0rd |
-
-![](images/SSA_ASOS_2023_Guide_20250924224506035.png)
-![](images/SSA_ASOS_2023_Guide_20250924224819600.png)
-![](images/SSA_ASOS_2023_Guide_20250924224921810.png)
-![](images/SSA_ASOS_2023_Guide_20250924224932019.png)
-![](images/SSA_ASOS_2023_Guide_20250924225038411.png)
-![](images/SSA_ASOS_2023_Guide_20250924225503896.png)
-![](images/SSA_ASOS_2023_Guide_20250924225630384.png)
-![](images/SSA_ASOS_2023_Guide_20250924225912037.png)
-Остальных пользователей создать по аналогии
+Если на рабочем столе нет корзины, значит политика применилась
+![](images/SSA_ASOS_2023_Guide_20250925225738297.png)
