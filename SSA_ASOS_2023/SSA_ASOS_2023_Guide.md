@@ -515,3 +515,88 @@ Experts, Competitors, Managers, Visitors,IT , Project_Budget-R, Project_Budget-W
 
 Если на рабочем столе нет корзины, значит политика применилась
 ![](images/SSA_ASOS_2023_Guide_20250925225738297.png)
+
+#### RAID-5 на FILES-M
+```
+Из трех имеющихся жестких дисков создайте RAID-5 массив; назначьте ему букву D:\.
+```
+Перейдём на **FILES-M**
+![](images/SSA_ASOS_2023_Guide_20250926202543517.png)
+Перед тем как сделать диск динамическим, нужно прописать
+```
+attribute clear disk readonly
+```
+Иначе будет следующая ошибка: 
+![](images/SSA_ASOS_2023_Guide_20250926202713127.png)
+
+После очистки атрибута `readonly` всё отрабатывает корректно
+![](images/SSA_ASOS_2023_Guide_20250926203042281.png)
+
+Эти действия необходимо проделать так же с 2 и 3 дисками, должно получиться следующее
+![](images/SSA_ASOS_2023_Guide_20250926203712058.png)
+
+После этого, создадим рейд массив
+
+![](images/SSA_ASOS_2023_Guide_20250926204009797.png)
+Буква D уже занята, поэтому сначала удалим её а потом присвоим нашему рейд массиву
+
+![](images/SSA_ASOS_2023_Guide_20250926204257831.png)
+Отформатируем раздел
+
+![](images/SSA_ASOS_2023_Guide_20250926211049069.png)
+
+Выполним задание
+```
+Для членов группы Experts настройте перенаправление папок my Documents и Desktop по адресу FILES-M→d:\shared\redirected
+```
+На **FILES-M** создадим папку
+```
+mkdir D:\shared\redirected
+```
+
+Теперь на **DC-M** создадим шару
+![](images/SSA_ASOS_2023_Guide_20250926221311396.png)
+![](images/SSA_ASOS_2023_Guide_20250926221412092.png)
+![](images/SSA_ASOS_2023_Guide_20250926221659926.png)
+![](images/SSA_ASOS_2023_Guide_20250926221730297.png)
+![](images/SSA_ASOS_2023_Guide_20250926223158597.png)
+![](images/SSA_ASOS_2023_Guide_20250926223222741.png)
+![](images/SSA_ASOS_2023_Guide_20250926223513478.png)
+![](images/SSA_ASOS_2023_Guide_20250927020432890.png)
+![](images/SSA_ASOS_2023_Guide_20250927020600590.png)
+![](images/SSA_ASOS_2023_Guide_20250927020634822.png)
+![](images/SSA_ASOS_2023_Guide_20250927020902609.png)
+![](images/SSA_ASOS_2023_Guide_20250927020922759.png)
+![](images/SSA_ASOS_2023_Guide_20250927021205259.png)
+![](images/SSA_ASOS_2023_Guide_20250927021220647.png)
+![](images/SSA_ASOS_2023_Guide_20250927021302555.png)
+![](images/SSA_ASOS_2023_Guide_20250927021335541.png)
+![](images/SSA_ASOS_2023_Guide_20250927021530645.png)
+![](images/SSA_ASOS_2023_Guide_20250927021602580.png)
+![](images/SSA_ASOS_2023_Guide_20250927021703255.png)
+![](images/SSA_ASOS_2023_Guide_20250927021712649.png)
+![](images/SSA_ASOS_2023_Guide_20250927021743051.png)
+![](images/SSA_ASOS_2023_Guide_20250927021759878.png)
+![](images/SSA_ASOS_2023_Guide_20250927021807869.png)
+![](images/SSA_ASOS_2023_Guide_20250927021815384.png)
+![](images/SSA_ASOS_2023_Guide_20250927021842020.png)
+![](images/SSA_ASOS_2023_Guide_20250927021916759.png)
+![](images/SSA_ASOS_2023_Guide_20250927022019109.png)
+![](images/SSA_ASOS_2023_Guide_20250927022027849.png)
+![](images/SSA_ASOS_2023_Guide_20250927022039517.png)
+![](images/SSA_ASOS_2023_Guide_20250927022402806.png)
+
+Создадим групповую политику в корне домена под названием `RedirectExperts` и отредактируем её
+![](images/SSA_ASOS_2023_Guide_20250927022720502.png)
+![](images/SSA_ASOS_2023_Guide_20250927022825801.png)
+По аналогии сделаем с `Documents`
+
+Зайдём на **CLIENT-M** под пользователем `ivan.p` и обновим политики в cmd
+```
+gpupdate /force
+```
+![](images/SSA_ASOS_2023_Guide_20250927023639977.png)
+Снова логинимся под пользователем `ivan.p`
+Проверим, где теперь находятся файлы на рабочем столе
+![](images/SSA_ASOS_2023_Guide_20250927023913400.png)
+![](images/SSA_ASOS_2023_Guide_20250927024005539.png)
