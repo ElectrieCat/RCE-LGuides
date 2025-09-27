@@ -506,6 +506,8 @@ Experts, Competitors, Managers, Visitors,IT , Project_Budget-R, Project_Budget-W
 Теперь уберём корзину с рабочего стола
 ![](images/SSA_ASOS_2023_Guide_20250925202045026.png)
 ![](images/SSA_ASOS_2023_Guide_20250925202108888.png)
+Так же отключим применение для группы IT
+![](images/SSA_ASOS_2023_Guide_20250927160441074.png)
 
 Перейдём на **CLIENT-M**
 
@@ -600,3 +602,59 @@ gpupdate /force
 Проверим, где теперь находятся файлы на рабочем столе
 ![](images/SSA_ASOS_2023_Guide_20250927023913400.png)
 ![](images/SSA_ASOS_2023_Guide_20250927024005539.png)
+
+Выполним задание из пункта "Элементы доменной инфраструктуры" 
+```
+Для каждого пользователя создайте автоматически подключаемую в качестве диска U:\ домашнюю папку по адресу FILES-M→d:\shares\users.
+```
+На **DC-M**
+Создадим нужные папки на **FILES-M**
+
+![](images/SSA_ASOS_2023_Guide_20250927162359845.png)
+![](images/SSA_ASOS_2023_Guide_20250927162612390.png)
+
+В итоге должен получиться следующий путь
+![](images/SSA_ASOS_2023_Guide_20250927162701807.png)
+Так же внутри папки `users` создадим папки с системным именем пользователей в качестве названия
+```
+kovalev.d
+petrov.i
+sidorova.o
+```
+Для каждой из них настроим доступ конкретному пользователю
+![](images/SSA_ASOS_2023_Guide_20250927174629127.png)
+![](images/SSA_ASOS_2023_Guide_20250927174934261.png)
+
+
+
+Настроим сетевую шару выбирая путь `d:\shares\users` 
+![](images/SSA_ASOS_2023_Guide_20250927164215326.png)
+![](images/SSA_ASOS_2023_Guide_20250927164242768.png)
+![](images/SSA_ASOS_2023_Guide_20250927164340138.png)
+![](images/SSA_ASOS_2023_Guide_20250927164437722.png)
+![](images/SSA_ASOS_2023_Guide_20250927164801735.png)
+![](images/SSA_ASOS_2023_Guide_20250927165145421.png)
+![](images/SSA_ASOS_2023_Guide_20250927165304211.png)
+![](images/SSA_ASOS_2023_Guide_20250927165338650.png)
+![](images/SSA_ASOS_2023_Guide_20250927165907053.png)
+![](images/SSA_ASOS_2023_Guide_20250927165926827.png)
+![](images/SSA_ASOS_2023_Guide_20250927165511496.png)
+![](images/SSA_ASOS_2023_Guide_20250927165547963.png)
+![](images/SSA_ASOS_2023_Guide_20250927165605873.png)
+![](images/SSA_ASOS_2023_Guide_20250927165627700.png)
+![](images/SSA_ASOS_2023_Guide_20250927170622218.png)
+![](images/SSA_ASOS_2023_Guide_20250927170652342.png)
+![](images/SSA_ASOS_2023_Guide_20250927170703094.png)
+![](images/SSA_ASOS_2023_Guide_20250927170714453.png)
+Создадим GPO для автоподключения диска в корне домена под именем "DiskU" и настроим его
+![](images/SSA_ASOS_2023_Guide_20250927175748154.png)
+Теперь зайдём на **CLIENT-M** под чьим-либо аккаунтом и проверим что диск подключен, так же попробуем создать файл
+![](images/SSA_ASOS_2023_Guide_20250927175839804.png)
+
+
+
+
+
+
+
+
