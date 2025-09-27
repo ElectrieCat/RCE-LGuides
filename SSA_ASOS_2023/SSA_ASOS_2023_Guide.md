@@ -531,10 +531,12 @@ Experts, Competitors, Managers, Visitors,IT , Project_Budget-R, Project_Budget-W
 ```
 Перейдём на **FILES-M**
 ![](images/SSA_ASOS_2023_Guide_20250926202543517.png)
+
 Перед тем как сделать диск динамическим, нужно прописать
 ```
 attribute clear disk readonly
 ```
+
 Иначе будет следующая ошибка: 
 ![](images/SSA_ASOS_2023_Guide_20250926202713127.png)
 
@@ -542,8 +544,8 @@ attribute clear disk readonly
 ![](images/SSA_ASOS_2023_Guide_20250926203042281.png)
 
 Эти действия необходимо проделать так же с 2 и 3 дисками, должно получиться следующее
-![](images/SSA_ASOS_2023_Guide_20250926203712058.png)
 
+![](images/SSA_ASOS_2023_Guide_20250926203712058.png)
 После этого, создадим рейд массив
 
 ![](images/SSA_ASOS_2023_Guide_20250926204009797.png)
@@ -605,6 +607,7 @@ mkdir D:\shared\redirected
 gpupdate /force
 ```
 ![](images/SSA_ASOS_2023_Guide_20250927023639977.png)
+
 Снова логинимся под пользователем `ivan.p`
 Проверим, где теперь находятся файлы на рабочем столе
 ![](images/SSA_ASOS_2023_Guide_20250927023913400.png)
