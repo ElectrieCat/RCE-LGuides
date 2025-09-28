@@ -36,11 +36,12 @@
 |----------------|-------------|----------------------------------------|
 | ROOTCA-M       | None        | 172.16.0.3/24                          |
 ### Таблица 2
+Внимание, в pdf файле задания имена в таблице неправильные, здесь она отредактирована
 | Ресурс          | Расположение                     | Доступ на чтение     | Доступ на запись    |
 |-----------------|----------------------------------|----------------------|---------------------|
-| Budget          |                                  | RU-Budget-R          | RU-Budget-W         |
-| Intranet        | FILES-M—D:\shares\projects       | RU-Intranet-R        | RU-Intranet-W       |
-| Logistics       |                                  | RU-Logistics-R       | RU-Logistics-W      |
+| Budget          |                                  | Project_Budget-R          | Project_Budget-W         |
+| Intranet        | FILES-M—D:\shares\projects       | Project_Intranet-R        | Project_Intranet-W       |
+| Logistics       |                                  | Project_Logistics-R       | Project_Logistics-W      |
 ## Базовая настройка
 - Установим операционные системы, настроим имена машин, их ip адреса в соответствии с таблицей 1, DNS сервера для них и разрешим ICMP только для **CLIENT-IZ**, **EDGE-IZ**, **DC-M**, **FILES-M**, **SUBCA-M**, **EDGE-M**, **CLIENT-M**, **ROOTCA-M**
 
@@ -661,10 +662,118 @@ sidorova.o
 Теперь зайдём на **CLIENT-M** под чьим-либо аккаунтом и проверим что диск подключен, так же попробуем создать файл
 ![](images/SSA_ASOS_2023_Guide_20250927175839804.png)
 
+## Общие папки
+```
+Cоздайте общие папки для подразделений (Competitors, Experts and Managers) по адресу FILES-M→d:\shares\departments;
+Обеспечьте привязку общей папки подразделения к соответствующей группе в качестве диска G:\;
+```
+Создадим папку на **FILES-M** вследующем расположении
+![](images/SSA_ASOS_2023_Guide_20250927210931588.png)
 
+Пошарим эту папку по сети
+![](images/SSA_ASOS_2023_Guide_20250927211522860.png)
+![](images/SSA_ASOS_2023_Guide_20250927211537032.png)
+![](images/SSA_ASOS_2023_Guide_20250927211625516.png)
+![](images/SSA_ASOS_2023_Guide_20250927211656404.png)
+![](images/SSA_ASOS_2023_Guide_20250927211824274.png)
+![](images/SSA_ASOS_2023_Guide_20250927211907744.png)
+![](images/SSA_ASOS_2023_Guide_20250927211947444.png)
+![](images/SSA_ASOS_2023_Guide_20250927212142635.png)
+![](images/SSA_ASOS_2023_Guide_20250927212250080.png)
+![](images/SSA_ASOS_2023_Guide_20250927212310615.png)
+![](images/SSA_ASOS_2023_Guide_20250927212359314.png)
+![](images/SSA_ASOS_2023_Guide_20250927212420361.png)
+![](images/SSA_ASOS_2023_Guide_20250927212537402.png)
+![](images/SSA_ASOS_2023_Guide_20250927212548197.png)
+![](images/SSA_ASOS_2023_Guide_20250927212601136.png)
+![](images/SSA_ASOS_2023_Guide_20250927212615336.png)
+Создадим папки и выдадим права нужным группам
+![](images/SSA_ASOS_2023_Guide_20250927213226716.png)
+![](images/SSA_ASOS_2023_Guide_20250927213326856.png)
+![](images/SSA_ASOS_2023_Guide_20250927213442658.png)
+![](images/SSA_ASOS_2023_Guide_20250927213603577.png)
+![](images/SSA_ASOS_2023_Guide_20250927213616533.png)
+Оставшимся папкам настроим права по аналогии
 
+Создадим GPO в корне домена и назовём его "DiskG", а так же настроим
+![](images/SSA_ASOS_2023_Guide_20250927213855748.png)
+![](images/SSA_ASOS_2023_Guide_20250927214615046.png)
+![](images/SSA_ASOS_2023_Guide_20250927214634817.png)
 
+Тут представлена настройка для "Competitors", для остальных настройте по аналогии
+![](images/SSA_ASOS_2023_Guide_20250927214727873.png)
+![](images/SSA_ASOS_2023_Guide_20250927214933298.png)
+![](images/SSA_ASOS_2023_Guide_20250927214945581.png)
+![](images/SSA_ASOS_2023_Guide_20250927215000979.png)
+![](images/SSA_ASOS_2023_Guide_20250927215231212.png)
 
+В итоге должно получиться так
+![](images/SSA_ASOS_2023_Guide_20250927220441118.png)
 
+Перейдём на **CLIENT-M** и обновим политики
+```
+gpupdate /force
+```
+![](images/SSA_ASOS_2023_Guide_20250927215738221.png)
 
+Проверим работу политики, залогинимся под юзером `petrov.i`, откроем диск и создадим файл
+![](images/SSA_ASOS_2023_Guide_20250927220255980.png)
+
+Выполним задания
+```
+Создайте общую папку проектов по адресу FILES-M→d:\shares\projects;
+В папке d:\shares\projects создайте следующие папки: Budget, Intranet, Logistics; 
+Настройте разрешения этих папок в соответствии с таблицей 2;
+```
+![](images/SSA_ASOS_2023_Guide_20250927220616057.png)
+![](images/SSA_ASOS_2023_Guide_20250927220909966.png)
+
+Пример для `Budget`, оставшиеся настроить по аналогии
+![](images/SSA_ASOS_2023_Guide_20250927221026910.png)
+![](images/SSA_ASOS_2023_Guide_20250928110948704.png)
+![](images/SSA_ASOS_2023_Guide_20250928111039144.png)
+![](images/SSA_ASOS_2023_Guide_20250928111048645.png)
+
+Расшарим папку по сети
+![](images/SSA_ASOS_2023_Guide_20250928133225838.png)
+![](images/SSA_ASOS_2023_Guide_20250928133238213.png)
+![](images/SSA_ASOS_2023_Guide_20250928133246103.png)
+![](images/SSA_ASOS_2023_Guide_20250928133349772.png)
+![](images/SSA_ASOS_2023_Guide_20250928133415259.png)
+![](images/SSA_ASOS_2023_Guide_20250928133847048.png)
+![](images/SSA_ASOS_2023_Guide_20250928133910346.png)
+![](images/SSA_ASOS_2023_Guide_20250928134032158.png)
+![](images/SSA_ASOS_2023_Guide_20250928143435108.png)
+![](images/SSA_ASOS_2023_Guide_20250928143456341.png)
+![](images/SSA_ASOS_2023_Guide_20250928144841160.png)
+![](images/SSA_ASOS_2023_Guide_20250928144858706.png)
+![](images/SSA_ASOS_2023_Guide_20250928144928365.png)
+![](images/SSA_ASOS_2023_Guide_20250928144951725.png)
+![](images/SSA_ASOS_2023_Guide_20250928145342299.png)
+![](images/SSA_ASOS_2023_Guide_20250928145409645.png)
+![](images/SSA_ASOS_2023_Guide_20250928145438378.png)
+![](images/SSA_ASOS_2023_Guide_20250928145507377.png)
+![](images/SSA_ASOS_2023_Guide_20250928145521361.png)
+![](images/SSA_ASOS_2023_Guide_20250928145530469.png)
+
+Создадим в корне домена GPO с именем "DiskP", а так же настроим эту политику
+![](images/SSA_ASOS_2023_Guide_20250928145829047.png)
+![](images/SSA_ASOS_2023_Guide_20250928150109018.png)
+![](images/SSA_ASOS_2023_Guide_20250928150122303.png)
+![](images/SSA_ASOS_2023_Guide_20250928150242318.png)
+![](images/SSA_ASOS_2023_Guide_20250928150514755.png)
+
+Переходим на **CLIENT-M** и обновляем политики
+```
+gpupdate /force
+```
+![](images/SSA_ASOS_2023_Guide_20250928150934158.png)
+
+Логинимся под пользователем `kovalev.d` и проверяем, что у нас показывается на диске P:
+Пользователь может видеть только папку, к которой у него есть доступ
+![](images/SSA_ASOS_2023_Guide_20250928152702079.png)
+Проверим права записи, создав файл
+![](images/SSA_ASOS_2023_Guide_20250928152750997.png)
+
+## Квоты/Файловые экраны
 
