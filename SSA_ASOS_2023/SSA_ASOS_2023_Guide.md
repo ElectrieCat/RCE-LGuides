@@ -776,4 +776,48 @@ gpupdate /force
 ![](images/SSA_ASOS_2023_Guide_20250928152750997.png)
 
 ## Квоты/Файловые экраны
+На **DC-M**
+![](images/SSA_ASOS_2023_Guide_20250929220013066.png)
+![](images/SSA_ASOS_2023_Guide_20250929220114246.png)
+![](images/SSA_ASOS_2023_Guide_20250929220152266.png)
+![](images/SSA_ASOS_2023_Guide_20250929220216543.png)
+![](images/SSA_ASOS_2023_Guide_20250929220323182.png)
+![](images/SSA_ASOS_2023_Guide_20250929221740716.png)
+![](images/SSA_ASOS_2023_Guide_20250929221809333.png)
 
+Зайдём на **CLIENT-M** и проверим работу квоты
+- если уже были залогинены под юзером то нужно перезайти
+![](images/SSA_ASOS_2023_Guide_20250929221926475.png)
+
+Выполним задание
+```
+Запретите хранение в домашних папках пользователей файлов с расширениями .cmd и .exe; учтите, что файлы остальных типов пользователи вправе хранить в домашних папках.
+```
+На **FILES-M** необходимо предварительно отключить файрвол на время настройки
+```
+netsh fi set opmode DISABLE
+```
+Продолжим настройку с **DC-M**
+![](images/SSA_ASOS_2023_Guide_20250929222734212.png)
+![](images/SSA_ASOS_2023_Guide_20250929222745590.png)
+![](images/SSA_ASOS_2023_Guide_20250929222759799.png)
+![](images/SSA_ASOS_2023_Guide_20250929222806752.png)
+![](images/SSA_ASOS_2023_Guide_20250929222830790.png)
+![](images/SSA_ASOS_2023_Guide_20250929222837284.png)
+![](images/SSA_ASOS_2023_Guide_20250929222945403.png)
+![](images/SSA_ASOS_2023_Guide_20250929223005600.png)
+![](images/SSA_ASOS_2023_Guide_20250929223056458.png)
+![](images/SSA_ASOS_2023_Guide_20250929233818290.png)
+![](images/SSA_ASOS_2023_Guide_20250929235948895.png)
+![](images/SSA_ASOS_2023_Guide_20250929234138753.png)
+![](images/SSA_ASOS_2023_Guide_20250929234441808.png)
+![](images/SSA_ASOS_2023_Guide_20250929234556886.png)
+![](images/SSA_ASOS_2023_Guide_20250929234726299.png)
+![](images/SSA_ASOS_2023_Guide_20250929234824346.png)
+
+Проверим настройки на **CLIENT-M**
+
+Создадим на рабочем столе файл с расширением .exe и попробуем переместить его в сетевую папку
+![](images/SSA_ASOS_2023_Guide_20250929235015306.png)
+![](images/SSA_ASOS_2023_Guide_20250929235123280.png)
+![](images/SSA_ASOS_2023_Guide_20250930000239781.png)
