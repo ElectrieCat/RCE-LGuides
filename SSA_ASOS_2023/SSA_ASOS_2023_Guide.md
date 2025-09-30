@@ -538,7 +538,7 @@ Experts, Competitors, Managers, Visitors,IT , Project_Budget-R, Project_Budget-W
 
 Перед тем как сделать диск динамическим, нужно прописать
 ```
-attribute clear disk readonly
+attribute disk clear readonly
 ```
 
 Иначе будет следующая ошибка: 
