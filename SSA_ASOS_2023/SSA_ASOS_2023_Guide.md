@@ -824,3 +824,162 @@ netsh fi set opmode DISABLE
 ![](images/SSA_ASOS_2023_Guide_20250929235015306.png)
 ![](images/SSA_ASOS_2023_Guide_20250929235123280.png)
 ![](images/SSA_ASOS_2023_Guide_20250930000239781.png)
+
+## Службы сертификации - не работает
+-  Установите службы сертификации
+На **ROOTCA-M**
+![](images/SSA_ASOS_2023_Guide_20251002222610112.png)
+![](images/SSA_ASOS_2023_Guide_20251002222639055.png)
+![](images/SSA_ASOS_2023_Guide_20251002222649799.png)
+![](images/SSA_ASOS_2023_Guide_20251004142939003.png)
+![](images/SSA_ASOS_2023_Guide_20251004142953428.png)
+![](images/SSA_ASOS_2023_Guide_20251004143008756.png)
+
+Теперь перезагрузите машину
+
+Аналогично установить AD CS на **SUBCA-M**, а пока далее по настройке **ROOTCA-M**
+
+![](images/SSA_ASOS_2023_Guide_20251004145335749.png)
+![](images/SSA_ASOS_2023_Guide_20251004145404314.png)
+![](images/SSA_ASOS_2023_Guide_20251004145817906.png)
+![](images/SSA_ASOS_2023_Guide_20251004145856900.png)
+![](images/SSA_ASOS_2023_Guide_20251004145916660.png)
+![](images/SSA_ASOS_2023_Guide_20251004145943976.png)
+![](images/SSA_ASOS_2023_Guide_20251004150051645.png)
+![](images/SSA_ASOS_2023_Guide_20251004150657856.png)
+![](images/SSA_ASOS_2023_Guide_20251004150807738.png)
+![](images/SSA_ASOS_2023_Guide_20251004150817320.png)
+![](images/SSA_ASOS_2023_Guide_20251004150850219.png)
+![](images/SSA_ASOS_2023_Guide_20251004150917583.png)
+
+Донастроим наш CA
+![](images/SSA_ASOS_2023_Guide_20251004152219309.png)
+![](images/SSA_ASOS_2023_Guide_20251004152859859.png)
+
+![](images/SSA_ASOS_2023_Guide_20251004153742404.png)
+
+Здесь нужно заполнить ссылку расположения, используйте объекты их выпадающего списка, опираясь на следующую строку  
+```
+http://RU-SUBCA.russia.net/certenroll/<caname><crlnamesuffix><deltacrlallowed>.crl
+```
+![](images/SSA_ASOS_2023_Guide_20251004154452381.png)
+
+В окне запроса на презагрузку сервиса выбрать "No"
+![](images/SSA_ASOS_2023_Guide_20251004154925372.png)
+
+Настроим AIA
+![](images/SSA_ASOS_2023_Guide_20251004155029076.png)
+
+Так же как для CRL, только опираясь на строку
+```
+http://RU-SUBCA.russia.net/certenroll/<serverdnsname>_<caname><certificatename>.crt
+```
+
+![](images/SSA_ASOS_2023_Guide_20251004155305745.png)
+![](images/SSA_ASOS_2023_Guide_20251004155459385.png)
+![](images/SSA_ASOS_2023_Guide_20251004155521895.png)
+![](images/SSA_ASOS_2023_Guide_20251004161701387.png)
+![](images/SSA_ASOS_2023_Guide_20251004161737429.png)
+
+На **SUBCA-M** от имени администратора домена
+
+Здесь мы заранее установили службу AD CS, теперь нужно её настроить
+![](images/SSA_ASOS_2023_Guide_20251004163702675.png)
+![](images/SSA_ASOS_2023_Guide_20251004164147376.png)
+![](images/SSA_ASOS_2023_Guide_20251004164156561.png)
+![](images/SSA_ASOS_2023_Guide_20251004164212650.png)
+![](images/SSA_ASOS_2023_Guide_20251004164858655.png)
+![](images/SSA_ASOS_2023_Guide_20251004164913561.png)
+![](images/SSA_ASOS_2023_Guide_20251004165000757.png)
+![](images/SSA_ASOS_2023_Guide_20251004165438578.png)
+![](images/SSA_ASOS_2023_Guide_20251004165452815.png)
+![](images/SSA_ASOS_2023_Guide_20251004165506835.png)
+![](images/SSA_ASOS_2023_Guide_20251004165540037.png)
+
+Отправим наш запрос в корневой CA
+![](images/SSA_ASOS_2023_Guide_20251004165833139.png)
+![](images/SSA_ASOS_2023_Guide_20251004165849932.png)
+![](images/SSA_ASOS_2023_Guide_20251004165914299.png)
+![](images/SSA_ASOS_2023_Guide_20251004170028189.png)
+![](images/SSA_ASOS_2023_Guide_20251004170127981.png)
+![](images/SSA_ASOS_2023_Guide_20251004170529302.png)
+![](images/SSA_ASOS_2023_Guide_20251004170544116.png)
+![](images/SSA_ASOS_2023_Guide_20251004170558706.png)
+![](images/SSA_ASOS_2023_Guide_20251004170931851.png)
+![](images/SSA_ASOS_2023_Guide_20251004171131504.png)
+
+Одобрение запроса на **ROOTCA-M**
+![](images/SSA_ASOS_2023_Guide_20251004171345468.png)
+![](images/SSA_ASOS_2023_Guide_20251004171702596.png)
+![](images/SSA_ASOS_2023_Guide_20251004171729556.png)
+![](images/SSA_ASOS_2023_Guide_20251004172308111.png)
+![](images/SSA_ASOS_2023_Guide_20251004172439470.png)
+![](images/SSA_ASOS_2023_Guide_20251004174109072.png)
+![](images/SSA_ASOS_2023_Guide_20251004174121676.png)
+
+Установим CRL на **SUBCA-M**
+![](images/SSA_ASOS_2023_Guide_20251004184154067.png)
+![](images/SSA_ASOS_2023_Guide_20251004184146039.png)
+![](images/SSA_ASOS_2023_Guide_20251004184218588.png)
+![](images/SSA_ASOS_2023_Guide_20251004184245473.png)
+![](images/SSA_ASOS_2023_Guide_20251004193707982.png)
+![](images/SSA_ASOS_2023_Guide_20251004193731155.png)
+![](images/SSA_ASOS_2023_Guide_20251004193808807.png)
+
+![](images/SSA_ASOS_2023_Guide_20251004193824465.png)
+![](images/SSA_ASOS_2023_Guide_20251004194008692.png)
+![](images/SSA_ASOS_2023_Guide_20251004194120778.png)
+![](images/SSA_ASOS_2023_Guide_20251004194132104.png)
+![](images/SSA_ASOS_2023_Guide_20251004194232488.png)
+![](images/SSA_ASOS_2023_Guide_20251004194243550.png)
+![](images/SSA_ASOS_2023_Guide_20251004194302447.png)
+![](images/SSA_ASOS_2023_Guide_20251004194312874.png)
+![](images/SSA_ASOS_2023_Guide_20251004194320939.png)
+
+Установка сертификата на **SUBCA-M**
+![](images/SSA_ASOS_2023_Guide_20251004173810156.png)
+![](images/SSA_ASOS_2023_Guide_20251004173827772.png)
+![](images/SSA_ASOS_2023_Guide_20251004173835323.png)
+![](images/SSA_ASOS_2023_Guide_20251004174243416.png)
+
+На **ROOTCA-M** отключим интерфейс
+![](images/SSA_ASOS_2023_Guide_20251004200309956.png)
+![](images/SSA_ASOS_2023_Guide_20251004200329432.png)
+
+Опубликуем CRL на **SUBCA-M**
+![](images/SSA_ASOS_2023_Guide_20251004202610328.png)
+![](images/SSA_ASOS_2023_Guide_20251004202328699.png)
+
+Настроим шаблоны выдаваемых сертификатов
+
+Обязательно входим под администратором домена на **SUBCA-M** 
+
+Шаблон для компьютеров
+![](images/SSA_ASOS_2023_Guide_20251004204605772.png)
+![](images/SSA_ASOS_2023_Guide_20251004204801102.png)
+![](images/SSA_ASOS_2023_Guide_20251004205004390.png)
+![](images/SSA_ASOS_2023_Guide_20251004205122777.png)
+![](images/SSA_ASOS_2023_Guide_20251004205415967.png)
+![](images/SSA_ASOS_2023_Guide_20251004205607734.png)
+![](images/SSA_ASOS_2023_Guide_20251004205756122.png)
+![](images/SSA_ASOS_2023_Guide_20251004205815450.png)
+![](images/SSA_ASOS_2023_Guide_20251004205834608.png)
+![](images/SSA_ASOS_2023_Guide_20251004205854515.png)
+
+Шаблон для менеджеров
+![](images/SSA_ASOS_2023_Guide_20251004210005869.png)
+![](images/SSA_ASOS_2023_Guide_20251004210230722.png)
+![](images/SSA_ASOS_2023_Guide_20251004210326584.png)
+![](images/SSA_ASOS_2023_Guide_20251004210505923.png)
+![](images/SSA_ASOS_2023_Guide_20251004210607445.png)
+![](images/SSA_ASOS_2023_Guide_20251004210912819.png)
+![](images/SSA_ASOS_2023_Guide_20251004210941817.png)
+![](images/SSA_ASOS_2023_Guide_20251004211000908.png)
+
+На **DC-M**
+Создадим GPO с названием "Certs"
+![](images/SSA_ASOS_2023_Guide_20251004212724863.png)
+![](images/SSA_ASOS_2023_Guide_20251004213213164.png)
+
+Перезагрузим **CLIENT-M** и зайдём под пользователем `kovalev.d`
+![](images/SSA_ASOS_2023_Guide_20251004213616921.png)
