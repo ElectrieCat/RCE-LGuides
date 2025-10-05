@@ -954,32 +954,55 @@ http://RU-SUBCA.russia.net/certenroll/<serverdnsname>_<caname><certificatename>.
 
 Обязательно входим под администратором домена на **SUBCA-M** 
 
-Шаблон для компьютеров
-![](images/SSA_ASOS_2023_Guide_20251004204605772.png)
-![](images/SSA_ASOS_2023_Guide_20251004204801102.png)
-![](images/SSA_ASOS_2023_Guide_20251004205004390.png)
-![](images/SSA_ASOS_2023_Guide_20251004205122777.png)
-![](images/SSA_ASOS_2023_Guide_20251004205415967.png)
-![](images/SSA_ASOS_2023_Guide_20251004205607734.png)
-![](images/SSA_ASOS_2023_Guide_20251004205756122.png)
-![](images/SSA_ASOS_2023_Guide_20251004205815450.png)
-![](images/SSA_ASOS_2023_Guide_20251004205834608.png)
-![](images/SSA_ASOS_2023_Guide_20251004205854515.png)
-
 Шаблон для менеджеров
-![](images/SSA_ASOS_2023_Guide_20251004210005869.png)
+![](images/SSA_ASOS_2023_Guide_20251004204605772.png)
+![](images/SSA_ASOS_2023_Guide_20251005174649037.png)
 ![](images/SSA_ASOS_2023_Guide_20251004210230722.png)
-![](images/SSA_ASOS_2023_Guide_20251004210326584.png)
-![](images/SSA_ASOS_2023_Guide_20251004210505923.png)
-![](images/SSA_ASOS_2023_Guide_20251004210607445.png)
-![](images/SSA_ASOS_2023_Guide_20251004210912819.png)
-![](images/SSA_ASOS_2023_Guide_20251004210941817.png)
-![](images/SSA_ASOS_2023_Guide_20251004211000908.png)
+![](images/SSA_ASOS_2023_Guide_20251005172153072.png)
+![](images/SSA_ASOS_2023_Guide_20251005172324283.png)
+![](images/SSA_ASOS_2023_Guide_20251005172402856.png)
+![](images/SSA_ASOS_2023_Guide_20251005172456959.png)
+![](images/SSA_ASOS_2023_Guide_20251005172605683.png)
+![](images/SSA_ASOS_2023_Guide_20251005172644175.png)
+![](images/SSA_ASOS_2023_Guide_20251005174422296.png)
+![](images/SSA_ASOS_2023_Guide_20251005175857812.png)
 
+
+Шаблон для компьютеров
+![](images/SSA_ASOS_2023_Guide_20251005180314148.png)
+![](images/SSA_ASOS_2023_Guide_20251005180404146.png)
+![](images/SSA_ASOS_2023_Guide_20251005180449996.png)
+![](images/SSA_ASOS_2023_Guide_20251005180525789.png)
+![](images/SSA_ASOS_2023_Guide_20251005180819333.png)
+![](images/SSA_ASOS_2023_Guide_20251005180905473.png)
+![](images/SSA_ASOS_2023_Guide_20251005180930591.png)
+![](images/SSA_ASOS_2023_Guide_20251005181000461.png)
+![](images/SSA_ASOS_2023_Guide_20251005181015651.png)
+![](images/SSA_ASOS_2023_Guide_20251005181055976.png)
+![](images/SSA_ASOS_2023_Guide_20251005181139180.png)
+
+Доставим цепочку сертификатов на 
 На **DC-M**
+![](images/SSA_ASOS_2023_Guide_20251005182059834.png)
+![](images/SSA_ASOS_2023_Guide_20251005182223026.png)
+![](images/SSA_ASOS_2023_Guide_20251005182255503.png)
+
 Создадим GPO с названием "Certs"
 ![](images/SSA_ASOS_2023_Guide_20251004212724863.png)
 ![](images/SSA_ASOS_2023_Guide_20251004213213164.png)
+![](images/SSA_ASOS_2023_Guide_20251005182543382.png)
+![](images/SSA_ASOS_2023_Guide_20251005182559428.png)
+![](images/SSA_ASOS_2023_Guide_20251005182728200.png)
+![](images/SSA_ASOS_2023_Guide_20251005182741593.png)
+![](images/SSA_ASOS_2023_Guide_20251005182755332.png)
+![](images/SSA_ASOS_2023_Guide_20251005182807822.png)
+
+Ждём загрузки
+![](images/SSA_ASOS_2023_Guide_20251005182834430.png)
 
 Перезагрузим **CLIENT-M** и зайдём под пользователем `kovalev.d`
 ![](images/SSA_ASOS_2023_Guide_20251004213616921.png)
+
+На **SUBCA-M**
+Вскоре после входа на **CLIENT-M** (около 1-3 минут), в issued certificates должны появиться следующие сертификаты:
+![](images/SSA_ASOS_2023_Guide_20251005184542341.png)
