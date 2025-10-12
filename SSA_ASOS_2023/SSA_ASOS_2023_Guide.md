@@ -161,6 +161,7 @@ sconfig
 ![](images/SSA_ASOS_2023_Guide_20250927193237719.png)
 ![](images/SSA_ASOS_2023_Guide_20250927193304908.png)
 
+RSAT на **CLIENT-M** - не поставляется в образе
 
 ## Поднятие домена
 Пример для **DC-M**, для **DC-IZ** по аналогии
@@ -300,6 +301,7 @@ ipconfig /renew
 ![](images/SSA_ASOS_2023_Guide_20250921115448359.png)
 ![](images/SSA_ASOS_2023_Guide_20250921115517679.png)
 ![](images/SSA_ASOS_2023_Guide_20250921115854454.png)
+
 Настроим и создадим PTR зону, а так же её репликацию на FILES-M 
 ![](images/SSA_ASOS_2023_Guide_20250921120104356.png)
 ![](images/SSA_ASOS_2023_Guide_20250921121924697.png)
@@ -311,13 +313,17 @@ ipconfig /renew
 ![](images/SSA_ASOS_2023_Guide_20250921122215973.png)
 ![](images/SSA_ASOS_2023_Guide_20250921122233311.png)
 ![](images/SSA_ASOS_2023_Guide_20250921122628865.png)
+
 Операцию создания PTR записи повторить для всех записей типа "A", кроме записей для машин **EDGE**, в которых IP адрес находится в другой подсети
 ![](images/SSA_ASOS_2023_Guide_20250921123034162.png)
+
 Проверим, что зоны DNS реплицировались на **FILES-M**
 ![](images/SSA_ASOS_2023_Guide_20250921123447935.png)
 ![](images/SSA_ASOS_2023_Guide_20250921123558451.png)
+
 ## USERGATE
 Его не будет, т.к. на текущем стенде в поставляемом образе отсутствует установщик :(
+
 ## RRAS
 На **DC-M**, по аналогии настроить на **DC-IZ**
 ![](images/SSA_ASOS_2023_Guide_20250921135331560.png)
@@ -332,7 +338,9 @@ ipconfig /renew
 ![](images/SSA_ASOS_2023_Guide_20250921135914902.png)
 ![](images/SSA_ASOS_2023_Guide_20250921135935011.png)
 ![](images/SSA_ASOS_2023_Guide_20250921140305996.png)
+
 Далее пример настройки маршрутизации в сегменте Ижевска, по аналогии сделать в Москве
+
 На **DC-IZ**
 ![](images/SSA_ASOS_2023_Guide_20250921221251567.png)
 ![](images/SSA_ASOS_2023_Guide_20250921221331687.png)
@@ -360,8 +368,10 @@ ipconfig /renew
 ![](images/SSA_ASOS_2023_Guide_20250921225919814.png)
 ![](images/SSA_ASOS_2023_Guide_20250921230200276.png)
 ![](images/SSA_ASOS_2023_Guide_20250921232014077.png)
+
 Теперь чтобы наши настройки точно применились, перезагрузим RRAS
 ![](images/SSA_ASOS_2023_Guide_20250921232256699.png)
+
 Проверим, что между сетями есть связь, с **DC-M** пинганём **DC-IZ**
 ![](images/SSA_ASOS_2023_Guide_20250922210350979.png)
 
@@ -391,8 +401,8 @@ Moscow.ru должны иметь доступ к ресурсам домена 
 ![](images/SSA_ASOS_2023_Guide_20250922220246775.png)
 ![](images/SSA_ASOS_2023_Guide_20250922220334367.png)
 ![](images/SSA_ASOS_2023_Guide_20250922220424666.png)
-![](images/SSA_ASOS_2023_Guide_20250922220635947.png)
-![](images/SSA_ASOS_2023_Guide_20250922220731945.png)
+![](images/SSA_ASOS_2023_Guide_20251009220320797.png)
+![](images/SSA_ASOS_2023_Guide_20251009221026874.png)
 
 Теперь подтвердим траст
 ![](images/SSA_ASOS_2023_Guide_20250922223332251.png)
@@ -405,6 +415,7 @@ Moscow.ru должны иметь доступ к ресурсам домена 
 
 Чтобы проверить, что односторонний траст был настроен, на **CLIENT-IZ** зайдем под пользователем Administrator в домене Moscow.ru
 ![](images/SSA_ASOS_2023_Guide_20250922224620896.png)
+
 Если нас впустило, то всё сработало
 ![](images/SSA_ASOS_2023_Guide_20250922224926227.png)
 
@@ -825,7 +836,7 @@ netsh fi set opmode DISABLE
 ![](images/SSA_ASOS_2023_Guide_20250929235123280.png)
 ![](images/SSA_ASOS_2023_Guide_20250930000239781.png)
 
-## Службы сертификации - не работает
+## Службы сертификации
 -  Установите службы сертификации
 На **ROOTCA-M**
 ![](images/SSA_ASOS_2023_Guide_20251002222610112.png)
@@ -1006,3 +1017,216 @@ http://RU-SUBCA.russia.net/certenroll/<serverdnsname>_<caname><certificatename>.
 На **SUBCA-M**
 Вскоре после входа на **CLIENT-M** (около 1-3 минут), в issued certificates должны появиться следующие сертификаты:
 ![](images/SSA_ASOS_2023_Guide_20251005184542341.png)
+
+## Донастройка DNS
+```
+создайте вручную все необходимые записи типа A и PTR для серверов домена и необходимых web-сервисов
+```
+На **DC-M**
+![](images/SSA_ASOS_2023_Guide_20251007200926838.png)
+![](images/SSA_ASOS_2023_Guide_20251007201257667.png)
+![](images/SSA_ASOS_2023_Guide_20251007203959511.png)
+
+На **DC-IZ**
+Сделать то-же самое по аналогии, но вписать в форвардеры 172.16.0.1 и домен moscow.ru
+
+Создадим A и PTR записи для сайтов
+
+На **DC-M**
+![](images/SSA_ASOS_2023_Guide_20251007205250560.png)
+![](images/SSA_ASOS_2023_Guide_20251007205400275.png)
+![](images/SSA_ASOS_2023_Guide_20251007205408004.png)
+
+Таким же образом создайте запись `www` с адресом `172.19.0.3`
+
+На **DC-IZ**
+
+Создайте запись `www` в зоне `izhevsk.ru` по той же схеме что и для `moscow.ru` с адресом `172.19.0.3`
+
+Так-же создайте запись `rds` в зоне `izhevsk.ru` с адресом 172.19.0.1
+
+## Службы удаленных рабочих столов (RDS)
+### Перенастройка трастов
+На **DC-M**
+![](images/SSA_ASOS_2023_Guide_20251010211621342.png)
+![](images/SSA_ASOS_2023_Guide_20251010211637413.png)
+![](images/SSA_ASOS_2023_Guide_20251010211833146.png)
+![](images/SSA_ASOS_2023_Guide_20251010211842818.png)
+
+Теперь настроим двустороннее доверие
+![](images/SSA_ASOS_2023_Guide_20251010212030713.png)
+![](images/SSA_ASOS_2023_Guide_20251010212121552.png)
+![](images/SSA_ASOS_2023_Guide_20251010212259788.png)
+![](images/SSA_ASOS_2023_Guide_20251010212313266.png)
+![](images/SSA_ASOS_2023_Guide_20251010212435843.png)
+![](images/SSA_ASOS_2023_Guide_20251010212508400.png)
+![](images/SSA_ASOS_2023_Guide_20251010212523328.png)
+![](images/SSA_ASOS_2023_Guide_20251010212754623.png)
+![](images/SSA_ASOS_2023_Guide_20251010212807672.png)
+![](images/SSA_ASOS_2023_Guide_20251010212827486.png)
+![](images/SSA_ASOS_2023_Guide_20251010212847269.png)
+![](images/SSA_ASOS_2023_Guide_20251010212906714.png)
+![](images/SSA_ASOS_2023_Guide_20251010212924732.png)
+![](images/SSA_ASOS_2023_Guide_20251010212951453.png)
+
+### Настройка DNS суффикса на DC-IZ
+![](images/SSA_ASOS_2023_Guide_20251011004451394.png)
+![](images/SSA_ASOS_2023_Guide_20251011004506357.png)
+![](images/SSA_ASOS_2023_Guide_20251011004526498.png)
+![](images/SSA_ASOS_2023_Guide_20251011004553077.png)
+![](images/SSA_ASOS_2023_Guide_20251011004601815.png)
+![](images/SSA_ASOS_2023_Guide_20251011004656943.png)
+![](images/SSA_ASOS_2023_Guide_20251011004719823.png)
+![](images/SSA_ASOS_2023_Guide_20251011004741559.png)
+![](images/SSA_ASOS_2023_Guide_20251011004757323.png)
+![](images/SSA_ASOS_2023_Guide_20251011004807077.png)
+![](images/SSA_ASOS_2023_Guide_20251011004815602.png)
+
+### Настройка публикаций в RDS
+![](images/SSA_ASOS_2023_Guide_20251007212237961.png)
+![](images/SSA_ASOS_2023_Guide_20251007220044455.png)
+![](images/SSA_ASOS_2023_Guide_20251008212143160.png)
+![](images/SSA_ASOS_2023_Guide_20251008212203671.png)
+![](images/SSA_ASOS_2023_Guide_20251008212219081.png)
+![](images/SSA_ASOS_2023_Guide_20251008212237600.png)
+![](images/SSA_ASOS_2023_Guide_20251008215745021.png)
+![](images/SSA_ASOS_2023_Guide_20251008215824863.png)
+![](images/SSA_ASOS_2023_Guide_20251008215922238.png)
+
+Настроим публикацию программ
+
+Wordpad
+![](images/SSA_ASOS_2023_Guide_20251008215931624.png)
+![](images/SSA_ASOS_2023_Guide_20251008220252532.png)
+![](images/SSA_ASOS_2023_Guide_20251010213317706.png)
+![](images/SSA_ASOS_2023_Guide_20251008220534889.png)
+![](images/SSA_ASOS_2023_Guide_20251008220548675.png)
+![](images/SSA_ASOS_2023_Guide_20251008220802315.png)
+![](images/SSA_ASOS_2023_Guide_20251011004905720.png)
+
+Notepad
+![](images/SSA_ASOS_2023_Guide_20251011005426982.png)
+![](images/SSA_ASOS_2023_Guide_20251011111323249.png)
+![](images/SSA_ASOS_2023_Guide_20251011111421672.png)
+![](images/SSA_ASOS_2023_Guide_20251011111432905.png)
+![](images/SSA_ASOS_2023_Guide_20251011111443172.png)
+![](images/SSA_ASOS_2023_Guide_20251011111510881.png)
+![](images/SSA_ASOS_2023_Guide_20251011111532735.png)
+![](images/SSA_ASOS_2023_Guide_20251011111612746.png)
+
+При выборе локации из которой искать объекты, попросит авторизоваться, авторизуемся под `Moscow.ru\Administrator`
+![](images/SSA_ASOS_2023_Guide_20251011111908371.png)
+![](images/SSA_ASOS_2023_Guide_20251011111934018.png)
+
+На **SUBCA-M** установим web сервер для создания запросов на сертификаты
+![](images/SSA_ASOS_2023_Guide_20251011142317684.png)
+![](images/SSA_ASOS_2023_Guide_20251011142325329.png)
+![](images/SSA_ASOS_2023_Guide_20251011142335712.png)
+![](images/SSA_ASOS_2023_Guide_20251011142415343.png)
+![](images/SSA_ASOS_2023_Guide_20251011142449094.png)
+![](images/SSA_ASOS_2023_Guide_20251011142456224.png)
+![](images/SSA_ASOS_2023_Guide_20251011142518446.png)
+![](SSA_ASOS_2023_Guide_20251011142659832.png
+
+### Разрешим доступ к RDS из moscow.ru
+![](images/SSA_ASOS_2023_Guide_20251012141244205.png)
+![](images/SSA_ASOS_2023_Guide_20251012141423391.png)
+
+### Раздача корневых сертификатов
+На **DC-M**
+На диске C создайте папку certnew и скопируйте туда PKCS7 сертификат, полученный ранее
+![](images/SSA_ASOS_2023_Guide_20251011154628780.png)
+
+Затем дайте общий доступ к этой папке
+![](images/SSA_ASOS_2023_Guide_20251011155012053.png)
+
+На **DC-IZ** создайте GPO с именем "cert" в корне домена izhevsk.ru и настройте его, так же мы опубликуем crl
+![](images/SSA_ASOS_2023_Guide_20251011153636903.png)
+![](images/SSA_ASOS_2023_Guide_20251011153935914.png)
+![](images/SSA_ASOS_2023_Guide_20251011153952055.png)
+![](images/SSA_ASOS_2023_Guide_20251011154000103.png)
+![](images/SSA_ASOS_2023_Guide_20251011155200387.png)
+![](images/SSA_ASOS_2023_Guide_20251011155210218.png)
+![](images/SSA_ASOS_2023_Guide_20251011155221992.png)
+![](images/SSA_ASOS_2023_Guide_20251011155231991.png)
+
+На **SUBCA-M**
+
+Публикация crl, найдите наиболее новый файл, если их несколько
+![](images/SSA_ASOS_2023_Guide_20251011235240361.png)
+![](images/SSA_ASOS_2023_Guide_20251011235307525.png)
+![](images/SSA_ASOS_2023_Guide_20251011235344218.png)
+![](images/SSA_ASOS_2023_Guide_20251011235401564.png)
+![](images/SSA_ASOS_2023_Guide_20251011234847144.png)
+![](images/SSA_ASOS_2023_Guide_20251011234925038.png)
+![](images/SSA_ASOS_2023_Guide_20251011235037285.png)
+![](images/SSA_ASOS_2023_Guide_20251011235103058.png)
+![](images/SSA_ASOS_2023_Guide_20251011235114011.png)
+![](images/SSA_ASOS_2023_Guide_20251011235127025.png)
+![](images/SSA_ASOS_2023_Guide_20251011235136232.png)
+
+### Настройка сертификатов RDS
+![](images/SSA_ASOS_2023_Guide_20251011180030885.png)
+![](images/SSA_ASOS_2023_Guide_20251011180146668.png)
+![](images/SSA_ASOS_2023_Guide_20251011180227663.png)
+![](images/SSA_ASOS_2023_Guide_20251011181032612.png)
+![](images/SSA_ASOS_2023_Guide_20251011181103830.png)
+![](images/SSA_ASOS_2023_Guide_20251011181227298.png)
+![](images/SSA_ASOS_2023_Guide_20251011181253600.png)
+![](images/SSA_ASOS_2023_Guide_20251011181432107.png)
+![](images/SSA_ASOS_2023_Guide_20251011181455793.png)
+![](images/SSA_ASOS_2023_Guide_20251011181520943.png)
+
+Теперь нужно пошарить папку и получить ответ от нашего CA на только что созданный запрос
+![](images/SSA_ASOS_2023_Guide_20251011182022843.png)
+![](images/SSA_ASOS_2023_Guide_20251011182056986.png)
+![](images/SSA_ASOS_2023_Guide_20251011182128415.png)
+![](images/SSA_ASOS_2023_Guide_20251011182148723.png)
+![](images/SSA_ASOS_2023_Guide_20251011182202130.png)
+![](images/SSA_ASOS_2023_Guide_20251011182211586.png)
+
+На **SUBCA-M**
+![](images/SSA_ASOS_2023_Guide_20251011183646360.png)
+![](images/SSA_ASOS_2023_Guide_20251011183941728.png)
+![](images/SSA_ASOS_2023_Guide_20251011183955954.png)
+![](images/SSA_ASOS_2023_Guide_20251011184103358.png)
+
+На **DC-IZ**
+![](images/SSA_ASOS_2023_Guide_20251011184224153.png)
+![](images/SSA_ASOS_2023_Guide_20251011184433330.png)
+![](images/SSA_ASOS_2023_Guide_20251011185059451.png)
+
+Теперь установим сертификат
+![](images/SSA_ASOS_2023_Guide_20251011185145331.png)
+![](images/SSA_ASOS_2023_Guide_20251011185309038.png)
+![](images/SSA_ASOS_2023_Guide_20251011185431943.png)
+![](images/SSA_ASOS_2023_Guide_20251011185453106.png)
+
+Повторить для всех строк, чтобы статус был Trusted
+![](images/SSA_ASOS_2023_Guide_20251011185927522.png)
+
+### Настроим ссылку для доступа
+На **DC-IZ**
+![](images/SSA_ASOS_2023_Guide_20251012153631583.png)
+![](images/SSA_ASOS_2023_Guide_20251012153612354.png)
+![](images/SSA_ASOS_2023_Guide_20251012153510336.png)
+
+
+### Разрешим уязвимое подключение
+На машине, с которой проверяем RDS, настроим политику чтобы разрешить уязвимое подключение (это не то-же самое, что разрешить подключение без сертификата)
+![](images/SSA_ASOS_2023_Guide_20251011232500364.png)
+![](images/SSA_ASOS_2023_Guide_20251011232806227.png)
+![](images/SSA_ASOS_2023_Guide_20251011232856797.png)
+
+### Проверим работу RDS
+
+С **CLIENT-M**, и по аналогии с **CLIENT-IZ**
+
+Открыть ссылку `https://rds.izhevsk.ru`
+![](images/SSA_ASOS_2023_Guide_20251011191737426.png)
+![](images/SSA_ASOS_2023_Guide_20251011191751155.png)
+![](images/SSA_ASOS_2023_Guide_20251011191800402.png)
+![](images/SSA_ASOS_2023_Guide_20251011191817603.png)
+![](images/SSA_ASOS_2023_Guide_20251011191903401.png)
+![](images/SSA_ASOS_2023_Guide_20251012130455588.png)
+![](images/SSA_ASOS_2023_Guide_20251012141558053.png)
