@@ -413,22 +413,6 @@ Moscow.ru должны иметь доступ к ресурсам домена 
 ![](images/SSA_ASOS_2023_Guide_20251009220320797.png)
 ![](images/SSA_ASOS_2023_Guide_20251009221026874.png)
 
-Теперь подтвердим траст
-![](images/SSA_ASOS_2023_Guide_20250922223332251.png)
-![](images/SSA_ASOS_2023_Guide_20250922223237165.png)
-![](images/SSA_ASOS_2023_Guide_20250922223245248.png)
-
-Теперь проверим что на **DC-IZ** траст тоже подтвержден
-![](images/SSA_ASOS_2023_Guide_20250922223828138.png)
-![](images/SSA_ASOS_2023_Guide_20250922224045161.png)
-
-Чтобы проверить, что односторонний траст был настроен, на **CLIENT-IZ** зайдем под пользователем Administrator в домене Moscow.ru
-![](images/SSA_ASOS_2023_Guide_20250922224620896.png)
-
-Если нас впустило, то всё сработало
-![](images/SSA_ASOS_2023_Guide_20250922224926227.png)
-
-
 Проверим противоположное на **CLIENT-M**, авторизация не должна сработать
 ![](images/SSA_ASOS_2023_Guide_20250922224457148.png)
 ![](images/SSA_ASOS_2023_Guide_20250922224528222.png)
@@ -1296,6 +1280,61 @@ Notepad
 Настроим https, по аналогии настройте для izhevsk
 ![](images/SSA_ASOS_2023_Guide_20251013092426401.png)
 
-Проверим доступ
+Проверим доступ к сайтам по примеру:
 ![](images/SSA_ASOS_2023_Guide_20251013092704994.png)
 ![](images/SSA_ASOS_2023_Guide_20251013092810144.png)
+
+## Сайт на FILES-M
+На **FILES-M**
+![](images/SSA_ASOS_2023_Guide_20251013234339840.png)
+![](images/SSA_ASOS_2023_Guide_20251013234356832.png)
+![](images/SSA_ASOS_2023_Guide_20251013234651553.png)
+![](images/SSA_ASOS_2023_Guide_20251013234706057.png)
+
+На **DC-M**
+![](images/SSA_ASOS_2023_Guide_20251013234100391.png)
+![](images/SSA_ASOS_2023_Guide_20251013234111035.png)
+![](images/SSA_ASOS_2023_Guide_20251013234214103.png)
+![](images/SSA_ASOS_2023_Guide_20251013234732725.png)
+![](images/SSA_ASOS_2023_Guide_20251013234751278.png)
+![](images/SSA_ASOS_2023_Guide_20251013234801026.png)
+![](images/SSA_ASOS_2023_Guide_20251013234952082.png)
+![](images/SSA_ASOS_2023_Guide_20251013235014679.png)
+![](images/SSA_ASOS_2023_Guide_20251013235117495.png)
+![](images/SSA_ASOS_2023_Guide_20251014000237865.png)
+
+Затем повторите установку указав management tools, удалять роли не нужно, просто доустановим этот пакет
+![](images/SSA_ASOS_2023_Guide_20251014005206122.png)
+
+На **FILES-M** выполните
+```
+powershell
+Install-WindowsFeature Web-Mgmt-Service
+Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\WebManagement\Server -Name EnableRemoteManagement -Value 1
+net start wmsvc
+netsh advfirewall firewall add rule name="IIS Remote Management" dir=in action=allow protocol=TCP localport=8172
+```
+
+Настроим сайт
+![](images/SSA_ASOS_2023_Guide_20251014005400283.png)
+![](images/SSA_ASOS_2023_Guide_20251014010704782.png)
+![](images/SSA_ASOS_2023_Guide_20251014010719132.png)
+![](images/SSA_ASOS_2023_Guide_20251014010751743.png)
+
+Ждём сопряжения
+![](images/SSA_ASOS_2023_Guide_20251014011045134.png)
+![](images/SSA_ASOS_2023_Guide_20251014011339273.png)
+
+Продолжение следует
+
+## Создание отключенных учетных записей
+```
+Cоздайте 3-4 пользователя, учетные записи должны быть отключены.
+```
+
+На **DC-IZ**, то-же самое повторить трижды по аналогии
+![](images/SSA_ASOS_2023_Guide_20251013231515428.png)
+![](images/SSA_ASOS_2023_Guide_20251013231611464.png)
+![](images/SSA_ASOS_2023_Guide_20251013231645112.png)
+![](images/SSA_ASOS_2023_Guide_20251013231728546.png)
+![](images/SSA_ASOS_2023_Guide_20251013231849768.png)
