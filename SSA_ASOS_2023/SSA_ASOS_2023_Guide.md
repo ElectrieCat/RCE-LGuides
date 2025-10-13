@@ -20,6 +20,15 @@
 
 ### Не работает Ctrl+Alt+Delete
 Попробуйте Ctrl+Alt+End
+### CA на SUBCA-M не стартует
+Ошибки:
+![](images/SSA_ASOS_2023_Guide_20251013085218355.png)
+![](images/SSA_ASOS_2023_Guide_20251013085348810.png)
+
+Решение: запустить cmd от админа и ввести команду
+![](images/SSA_ASOS_2023_Guide_20251013085639270.png)
+
+
 ### Рекомендации
 * В процессе настройки читайте все информационные блоки текста, это полезно и иногда может подсказать решение если что-либо не сработало
 ## Таблицы
@@ -1230,3 +1239,63 @@ Notepad
 ![](images/SSA_ASOS_2023_Guide_20251011191903401.png)
 ![](images/SSA_ASOS_2023_Guide_20251012130455588.png)
 ![](images/SSA_ASOS_2023_Guide_20251012141558053.png)
+
+## Сайты на IIS-IZ
+Входим под аккаунт `izhevsk.ru\Administrator`
+![](images/SSA_ASOS_2023_Guide_20251012235922899.png)
+![](images/SSA_ASOS_2023_Guide_20251012235934370.png)
+![](images/SSA_ASOS_2023_Guide_20251012235947176.png)
+![](images/SSA_ASOS_2023_Guide_20251013000027250.png)
+![](images/SSA_ASOS_2023_Guide_20251013000112387.png)
+![](images/SSA_ASOS_2023_Guide_20251013000127489.png)
+![](images/SSA_ASOS_2023_Guide_20251013001504465.png)
+![](images/SSA_ASOS_2023_Guide_20251013005926694.png)
+![](images/SSA_ASOS_2023_Guide_20251013012743967.png)
+
+Создадим сайты `www.moscow.ru` и `www.izhevsk.ru`
+![](images/SSA_ASOS_2023_Guide_20251013025027921.png)
+![](images/SSA_ASOS_2023_Guide_20251013025159211.png)
+![](images/SSA_ASOS_2023_Guide_20251013025435226.png)
+![](images/SSA_ASOS_2023_Guide_20251013025453937.png)
+![](images/SSA_ASOS_2023_Guide_20251013030414882.png)
+
+Для `www.izhevsk.ru` сделайте то-же самое по аналогии
+
+Создайте файл `index.htm` в каждой из директории, который содержит
+```
+<html><body>Moscow
+</body></html>
+```
+По аналогии создать файл для izhevsk
+
+![](images/SSA_ASOS_2023_Guide_20251013032813376.png)
+![](images/SSA_ASOS_2023_Guide_20251013032848431.png)
+![](images/SSA_ASOS_2023_Guide_20251013033338066.png)
+![](images/SSA_ASOS_2023_Guide_20251013033409274.png)
+![](images/SSA_ASOS_2023_Guide_20251013033403325.png)
+
+Создайте сертификат и привяжите к сайту
+![](images/SSA_ASOS_2023_Guide_20251013034134607.png)
+![](images/SSA_ASOS_2023_Guide_20251013034241696.png)
+![](images/SSA_ASOS_2023_Guide_20251013034255030.png)
+![](images/SSA_ASOS_2023_Guide_20251013034509732.png)
+
+На **SUBCA-M**
+![](images/SSA_ASOS_2023_Guide_20251013034722745.png)
+![](images/SSA_ASOS_2023_Guide_20251013034730917.png)
+
+Ждём пока подпишет
+![](images/SSA_ASOS_2023_Guide_20251013085842697.png)
+
+На **IIS-IZ**
+![](images/SSA_ASOS_2023_Guide_20251013090116382.png)
+![](images/SSA_ASOS_2023_Guide_20251013090217875.png)
+
+Повторите ту же последовательность получения сертификата для www.izhevsk.ru
+
+Настроим https, по аналогии настройте для izhevsk
+![](images/SSA_ASOS_2023_Guide_20251013092426401.png)
+
+Проверим доступ
+![](images/SSA_ASOS_2023_Guide_20251013092704994.png)
+![](images/SSA_ASOS_2023_Guide_20251013092810144.png)
