@@ -404,18 +404,20 @@ Moscow.ru должны иметь доступ к ресурсам домена 
 ![](images/SSA_ASOS_2023_Guide_20250922211951767.png) 
 ![](images/SSA_ASOS_2023_Guide_20250922214311756.png)
 ![](images/SSA_ASOS_2023_Guide_20250922215759333.png)
-![](images/SSA_ASOS_2023_Guide_20250922215938680.png)
-![](images/SSA_ASOS_2023_Guide_20250922220101342.png)
-![](images/SSA_ASOS_2023_Guide_20250922220201122.png)
-![](images/SSA_ASOS_2023_Guide_20250922220246775.png)
-![](images/SSA_ASOS_2023_Guide_20250922220334367.png)
-![](images/SSA_ASOS_2023_Guide_20250922220424666.png)
-![](images/SSA_ASOS_2023_Guide_20251009220320797.png)
-![](images/SSA_ASOS_2023_Guide_20251009221026874.png)
+![](images/SSA_ASOS_2023_Guide_20251026221721632.png)
+![](images/SSA_ASOS_2023_Guide_20251026221803674.png)
+![](images/SSA_ASOS_2023_Guide_20251026222137694.png)
+![](images/SSA_ASOS_2023_Guide_20251026225535420.png)
+![](images/SSA_ASOS_2023_Guide_20251026225606796.png)
+![](images/SSA_ASOS_2023_Guide_20251026225624816.png)
+![](images/SSA_ASOS_2023_Guide_20251026225640967.png)
+![](images/SSA_ASOS_2023_Guide_20251026225653804.png)
 
-Проверим противоположное на **CLIENT-M**, авторизация не должна сработать
-![](images/SSA_ASOS_2023_Guide_20250922224457148.png)
-![](images/SSA_ASOS_2023_Guide_20250922224528222.png)
+Проверка:
+
+На CLIENT-M зайдите под izhevsk.ru\administrator - вход будет успешен
+
+На CLIENT-IZ зайдите под moscow.ru\administrator - вход будет отклонён
 
 ## GPO
 ### Элементы доменной инфраструктуры
@@ -1284,7 +1286,7 @@ Notepad
 ![](images/SSA_ASOS_2023_Guide_20251013092704994.png)
 ![](images/SSA_ASOS_2023_Guide_20251013092810144.png)
 
-## Сайт на FILES-M
+## Сайт на FILES-M - сломано
 На **FILES-M**
 ![](images/SSA_ASOS_2023_Guide_20251013234339840.png)
 ![](images/SSA_ASOS_2023_Guide_20251013234356832.png)
@@ -1303,7 +1305,8 @@ Notepad
 ![](images/SSA_ASOS_2023_Guide_20251013235117495.png)
 ![](images/SSA_ASOS_2023_Guide_20251014000237865.png)
 
-Затем повторите установку указав management tools, удалять роли не нужно, просто доустановим этот пакет
+Затем повторите установку с дополнительными ролями, удалять предыдущие роли не нужно, просто доустановим их
+![](images/SSA_ASOS_2023_Guide_20251015004650881.png)
 ![](images/SSA_ASOS_2023_Guide_20251014005206122.png)
 
 На **FILES-M** выполните
@@ -1315,7 +1318,16 @@ net start wmsvc
 netsh advfirewall firewall add rule name="IIS Remote Management" dir=in action=allow protocol=TCP localport=8172
 ```
 
-Настроим сайт
+На **DC-M**
+На \\files-m\D$ создайте папку iis-mgrs, в ней создайте файл index.htm со следующим содержимым
+```
+<html><body>Managers
+</body></html>
+```
+Права на iis-mgrs
+![](images/SSA_ASOS_2023_Guide_20251015233536146.png)
+
+Настроим подключение
 ![](images/SSA_ASOS_2023_Guide_20251014005400283.png)
 ![](images/SSA_ASOS_2023_Guide_20251014010704782.png)
 ![](images/SSA_ASOS_2023_Guide_20251014010719132.png)
@@ -1325,7 +1337,30 @@ netsh advfirewall firewall add rule name="IIS Remote Management" dir=in action=a
 ![](images/SSA_ASOS_2023_Guide_20251014011045134.png)
 ![](images/SSA_ASOS_2023_Guide_20251014011339273.png)
 
-Продолжение следует
+На **DC-M**
+
+Сделаем сертификат
+![](images/SSA_ASOS_2023_Guide_20251026144024567.png)
+![](images/SSA_ASOS_2023_Guide_20251026144127646.png)
+![](images/SSA_ASOS_2023_Guide_20251026144136762.png)
+![](images/SSA_ASOS_2023_Guide_20251026144940065.png)
+![](images/SSA_ASOS_2023_Guide_20251026150010421.png)
+
+На **SUBCA-M**
+```
+certreq -attrib "CertificateTemplate:WebServer -submit c:\mreq.txt c:\mreq.cer"
+```
+![](images/SSA_ASOS_2023_Guide_20251026153131704.png)
+![](images/SSA_ASOS_2023_Guide_20251026153415442.png)
+
+На **DC-M**
+![](images/SSA_ASOS_2023_Guide_20251026154839475.png)
+frfr
+
+Настроим сайт
+![](images/SSA_ASOS_2023_Guide_20251015010912083.png)
+![](images/SSA_ASOS_2023_Guide_20251020002732887.png)
+
 
 ## Создание отключенных учетных записей
 ```
