@@ -1226,6 +1226,18 @@ Notepad
 ![](images/SSA_ASOS_2023_Guide_20251012130455588.png)
 ![](images/SSA_ASOS_2023_Guide_20251012141558053.png)
 
+## Создание отключенных учетных записей
+```
+Cоздайте 3-4 пользователя, учетные записи должны быть отключены.
+```
+
+На **DC-IZ**, то-же самое повторить трижды по аналогии
+![](images/SSA_ASOS_2023_Guide_20251013231515428.png)
+![](images/SSA_ASOS_2023_Guide_20251013231611464.png)
+![](images/SSA_ASOS_2023_Guide_20251013231645112.png)
+![](images/SSA_ASOS_2023_Guide_20251013231728546.png)
+![](images/SSA_ASOS_2023_Guide_20251013231849768.png)
+
 ## Сайты на IIS-IZ
 Входим под аккаунт `izhevsk.ru\Administrator`
 ![](images/SSA_ASOS_2023_Guide_20251012235922899.png)
@@ -1355,21 +1367,50 @@ certreq -attrib "CertificateTemplate:WebServer -submit c:\mreq.txt c:\mreq.cer"
 
 На **DC-M**
 ![](images/SSA_ASOS_2023_Guide_20251026154839475.png)
-frfr
+![](images/SSA_ASOS_2023_Guide_20251103140954148.png)
+![](images/SSA_ASOS_2023_Guide_20251103141016135.png)
+![](images/SSA_ASOS_2023_Guide_20251103141145494.png)
+
+Для FILES-M установите роли IIS
+![](images/SSA_ASOS_2023_Guide_20251103193722401.png)
+
+На **FILES-M**
+```
+powershell
+Import-PfxCertificate -Password (ConvertTo-SecureString -String "truststore_password" -AsPlainText -Force) -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\managers.pfx
+```
 
 Настроим сайт
 ![](images/SSA_ASOS_2023_Guide_20251015010912083.png)
 ![](images/SSA_ASOS_2023_Guide_20251020002732887.png)
+![](images/SSA_ASOS_2023_Guide_20251103222323948.png)
+![](images/SSA_ASOS_2023_Guide_20251103222159610.png)
+![](images/SSA_ASOS_2023_Guide_20251103222243240.png)
+![](images/SSA_ASOS_2023_Guide_20251103222312316.png)
+![](images/SSA_ASOS_2023_Guide_20251103203425074.png)
+![](images/SSA_ASOS_2023_Guide_20251103203737373.png)
+![](images/SSA_ASOS_2023_Guide_20251103204013517.png)
+![](images/SSA_ASOS_2023_Guide_20251103204047444.png)
+![](images/SSA_ASOS_2023_Guide_20251103204252333.png)
+![](images/SSA_ASOS_2023_Guide_20251103204346401.png)
 
-
-## Создание отключенных учетных записей
+На FILES-M презагрузим IIS
 ```
-Cоздайте 3-4 пользователя, учетные записи должны быть отключены.
+iisreset
 ```
 
-На **DC-IZ**, то-же самое повторить трижды по аналогии
-![](images/SSA_ASOS_2023_Guide_20251013231515428.png)
-![](images/SSA_ASOS_2023_Guide_20251013231611464.png)
-![](images/SSA_ASOS_2023_Guide_20251013231645112.png)
-![](images/SSA_ASOS_2023_Guide_20251013231728546.png)
-![](images/SSA_ASOS_2023_Guide_20251013231849768.png)
+Продолжим настройку сайта с **DC-M**
+![](images/SSA_ASOS_2023_Guide_20251103212755892.png)
+![](images/SSA_ASOS_2023_Guide_20251103212830868.png)
+![](images/SSA_ASOS_2023_Guide_20251103213016824.png)
+
+На FILES-M презагрузим IIS
+```
+iisreset
+```
+
+Далее заходим на **CLIENT-M** под пользователем `kovalev.d`, в internet explorer открываем сайт `managers.moscow.ru`, ждём некоторое время и предъявляем свой сертификат, затем ждём ~~открытия сайта.~~ и понимаем что ничего не работает.
+
+Это задание не решено до конца, возможно в описанном здесь процессе есть ошибки и их нужно найти и исправить, либо же не сделаны какие-то нужные шаги о которых я не знаю.
+
+Если у вас получится его решить, создайте пожалуйста issue, мне будет интересно почитать :)
